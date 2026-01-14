@@ -47,3 +47,18 @@ To modify this program, if it was well constructed, you should have only needed 
 3. Ask Gemini to give you videos that explain Java variables.
 4. Reflect on your experience. Were the explanations and resources useful? What resources should you check FIRST, before you start asking AI?
 	I will always check other sources that I know I can trust before asking AI.
+
+
+**Lab Activity 1
+So many issues, but I think I got it done!
+
+**Lab Activity 2
+change EmergencyTest to Test
+	error prediction - 
+change Broadcast to broadcast
+remove the first quotation makr in the string
+remove the last quotation mark in the string
+change main to man
+change println to bogus
+remove the semicolon at the end of the println statement
+remove the last brace in the program
