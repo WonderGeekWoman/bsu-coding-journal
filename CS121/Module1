@@ -1,0 +1,49 @@
+**Part 1: Explore AI Output
+
+1. Ask Gemini for a cinnamon roll recipe.
+Did you get a recipe?
+	Yes
+Does it make sense?
+	Yes
+Does it contain the correct ingredients?
+	Yes
+Does it have sensible spices?
+	Probably not enough cinnamon for me, but yes
+
+2. Ask Gemini for a cinnamon roll recipe that contains tomatoes.
+Do you get a recipe?
+	Yes
+Do you think this would taste good?
+	I am unsure, but I would try one if someone else made it
+Do a websearch for the same recipe.
+Do any of those recipes match what Gemini gave you? I did not find cinnamon rolls, but found other rolls that did not contain sugar.
+	I found no roll recipes that had tomato and cinnamon
+
+3. Reflect on your experience. Unless you have previous experience baking, you probably couldn't just look at the recipe and figure out if it would be good. Note that even though tomatoes have no business being in cinnamon rolls, Gemini would give you what you asked. What does this tell you about the limitations of AI? How much should you trust the output of an AI?
+	I didn't want to use AI before this class. My lack of desire has not changed. It doesn't know everything, and it doesn't know what it doesn't know.
+
+**Part 2: Code Exploration
+
+1. Ask Gemini to create a solution in Java to solve the following problem. You need to write a program for a local orchard. They need something that will help them when selling trees. They need to be able to enter what tree was sold, track sales, and analyze the sales.
+What does your program actually do? The problem description was somewhat vague, so there is room for interpretation. How do you know what your program does?
+	It supposedly tracks and analyzes sales. I can only know what it tells me at this point.
+Is the solution correct? How do you know? What did you do to test it?
+	No idea. Don't know what it says and have no way to test it.
+Is the solution correctly structured? That is, does it follow good design principles? How easy is it to modify? Does it follow the correct coding conventions?
+	Don't know
+
+2. Now take that solution and modify it to sell berries instead of trees.
+What was modified? Does it still work? How do you know?
+	Yes, it was modified. Still do not now if it works.
+To modify this program, if it was well constructed, you should have only needed to swap out a single class. Likely by the end of this class but definitely by the end of CS 221, you should be able to recognize that. Modifying and validating the functionality of this program should take less than an hour - all you need to do is implement the new class and test it.
+
+3. Reflect on your experience. This activity should have shown you that in order to get a good solution from the AI, you both have to know what you're asking for and be able to analyze what you get. The only way to be able to do these things is to have a fundamental understanding the problem.
+	AI has serious limitations.
+
+**Part 3: But I Want To Use AI!
+
+1. Ask Gemini to explain Java variables to you.
+2. Ask Gemini to give you examples of Java primative variables.
+3. Ask Gemini to give you videos that explain Java variables.
+4. Reflect on your experience. Were the explanations and resources useful? What resources should you check FIRST, before you start asking AI?
+	I will always check other sources that I know I can trust before asking AI.
