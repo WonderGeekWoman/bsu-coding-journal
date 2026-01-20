@@ -54,13 +54,29 @@ To modify this program, if it was well constructed, you should have only needed 
 **Lab Activity 1
 So many issues, but I think I got it done!
 
+I had to get an extension for the lab because I could NOT figure out why I couldn't get VS Code to do what it was supposed to be doing. I talked with IT people, my professor, and Ben Peterson. Finally got it working. I will finish this lab in Kount just in case something goes awry again. It is still acting up, but should get it done.
+
 **Lab Activity 2
-change EmergencyTest to Test
-	error prediction - 
-change Broadcast to broadcast
-remove the first quotation makr in the string
-remove the last quotation mark in the string
-change main to man
-change println to bogus
-remove the semicolon at the end of the println statement
-remove the last brace in the program
+- change EmergencyTest to Test
+    >Error: Could not find or load main class EmergencyTest
+- change Broadcast to broadcast
+    - No issue, just prints "An Emergency broadcast"
+- remove the first quotation mark in the string
+    - Three syntax errors
+    >An cannot be resolved to a variable
+    >String literal is not properly closed by a double-quote
+- remove the last quotation mark in the string
+    >String literal is not properly closed by a double-quote
+- change main to man
+    >Error: Main method not found in class EmergencyTest, please define the main method as:
+   public static void main(String[] args) or a JavaFX application class must extend javafx.application.Application
+- change println to bogus
+    >The method bogus(String) is undefined for the type PrintStream
+- remove the semicolon at the end of the println statement
+    >Syntax error, insert ";" to complete BlockStatements
+- remove the last brace in the program
+    >Syntax error, insert "}" to complete ClassBody
+
+**Lab Activity 3
+Cannot have a method call inside the class definition, it has to be inside a method.
+
