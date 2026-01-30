@@ -1,0 +1,41 @@
+/**
+*If want user input, import Scanner first!
+*/
+
+import java.util.Scanner;
+
+/**
+Declare class
+*/
+
+public class __matches name of file__
+{
+
+  /**
+  *
+
+  public static void main(String[] args)
+  {
+
+    /**
+    *Declare variables;
+    */
+
+    /**
+    *If have Scanner, open scanner before or after variables and close at bottom
+    */
+    Scanner _name scanner_ = new Scanner(System.in);
+
+
+
+    initialize variables as desired;
+
+    /**
+    *Create output as desired with print or println
+    */
+
+    System.out.println("text" + variables);
+
+    _scanner_.close();
+  }
+}
