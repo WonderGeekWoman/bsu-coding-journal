@@ -75,3 +75,10 @@ public class SecondsConverter
     }
 
 }
+
+
+Enter the number of seconds: 9999
+
+Hours: 2
+Minutes: 46
+Seconds: 39
