@@ -1,1 +1,46 @@
+*****LAB 2*****
 
+import java.util.Scanner;
+
+public class HMSConverter
+{
+    public static void main(String[] args)
+    {
+        int hours;
+        int minutes;
+        int seconds;
+        int total;
+
+        Scanner kbd = new Scanner(System.in);
+
+        System.out.print("Enter the number of hours: ");
+        hours = kbd.nextInt();
+
+        System.out.print("Enter the number of minutes: ");
+        minutes = kbd.nextInt();
+
+        System.out.print("Enter the number of seconds: ");
+        seconds = kbd.nextInt();
+
+        System.out.println();
+
+        total = ((hours * 3600) + (minutes * 60) + seconds);
+
+        System.out.println("Total seconds: " + total);
+        
+
+        kbd.close();
+    }
+    
+}
+
+Enter the number of hours: 2
+Enter the number of minutes: 5
+Enter the number of seconds: 19
+
+Total seconds: 7519
+
+
+
+
+*****LAB 3*****
