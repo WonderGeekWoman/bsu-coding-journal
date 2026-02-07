@@ -37,8 +37,38 @@ public class AccountGenerator
 
         kbd.close();
 
+    }   
+}
+
+
+________________________________________________________________________________________________________________
+
+/**
+ * This code will take a user-inputted radius of a sphere and print the volume and
+ *   surface area of the sphere with four decimal precision.
+ * @author Amanda Halverson
+ */
+
+import java.util.Scanner;
+
+public class SphereCalculator
+{
+    public static void main(String[] args)
+    {
+        Scanner kbd = new Scanner(System.in);
+
+        /* Input processing */
+        System.out.print("Enter the sphere's radius: ");
+        double userRadius = kbd.nextDouble();
+
+        /* Calculations */
+        double volume = 4.0 / 3 * Math.PI * Math.pow(userRadius, 3);
+        double surfaceArea = 4.0 * Math.PI * Math.pow(userRadius, 2);
+
+        /* Output processing */
+        System.out.printf("Volume: " + "%.4f\n", volume);
+        System.out.printf("Surface area: " + "%.4f\n", surfaceArea);
+
+        kbd.close();
     }
-
-
-    
 }
