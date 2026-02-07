@@ -36,6 +36,6 @@ public class __matches name of file__
 
     System.out.println("text" + variables);
 
-    _scanner_.close();
+    _name scanner_.close();
   }
 }
