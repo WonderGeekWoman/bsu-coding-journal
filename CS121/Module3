@@ -1,0 +1,44 @@
+/**
+ * This code will generate a new username from user-input first and last names,
+ *   including a random 2 digit number.
+ * @author Amanda Halverson
+ */
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class AccountGenerator
+{
+    public static void main(String[] args)
+    {
+        Scanner kbd = new Scanner(System.in);
+        Random randGen = new Random();
+
+        /* Input processing */
+        System.out.print("Enter your first name: ");
+        String firstName = kbd.nextLine();
+        System.out.print("Enter your last name: ");
+        String lastName = kbd.nextLine();
+
+        /* Convert user values to lowercase */
+        firstName = firstName.toLowerCase();
+        lastName = lastName.toLowerCase();
+
+        /* Get specific characters from user input */
+        char firstLetterFirstName = firstName.charAt(0);
+        String fiveLettersLastName = lastName.substring(0,5);
+
+        /* Get random int */
+        int randInt = randGen.nextInt(90)+10;
+
+        /* Output processing */
+        String userName = firstLetterFirstName + fiveLettersLastName;
+        System.out.println("Username: " + userName + randInt);
+
+        kbd.close();
+
+    }
+
+
+    
+}
