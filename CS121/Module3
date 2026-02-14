@@ -1,3 +1,5 @@
+Lab Activity Warmup
+
 /**
  * This code will generate a new username from user-input first and last names,
  *   including a random 2 digit number.
@@ -42,6 +44,7 @@ public class AccountGenerator
 
 
 ________________________________________________________________________________________________________________
+Lab Activity 1
 
 /**
  * This code will take a user-inputted radius of a sphere and print the volume and
@@ -72,3 +75,71 @@ public class SphereCalculator
         kbd.close();
     }
 }
+
+____________________________________________________________________________________________________________
+Lab Activity 2
+
+/**
+ * This code will take input from a user and generate a job ad for publication.
+ * @author Amanda Halverson
+*/
+
+import java.util.Scanner;
+import java.text.NumberFormat;
+
+public class AdGenerator
+{
+    public static void main (String[] args)
+    {
+        Scanner kbd = new Scanner(System.in);
+
+        // phoneNumber;
+        double hourlyRate;
+
+
+        /* Input processing */
+        System.out.println("Welcome to AdGenerator!");
+        System.out.println("Please enter your profile information.");
+        System.out.println("======================================");
+
+        System.out.print("First name: ");
+        String firstName = kbd.nextLine();
+        System.out.print("Middle name: ");
+        String middleName = kbd.nextLine();
+        System.out.print("Last name: ");
+        String lastName = kbd.nextLine();
+        System.out.print("Job title: ");
+        String jobTitle = kbd.nextLine();
+        System.out.print("Phone number (10 digit): ");
+        String phoneNumber = kbd.nextLine();
+        System.out.print("Hourly rate: ");
+        hourlyRate = kbd.nextDouble();
+
+        /* Format phone number */
+
+        String phoneNumberFormat = "(" + phoneNumber.substring(0,3) + ") " + phoneNumber.substring(3,6) + "-" + phoneNumber.substring(6);
+
+        /* Get first initial from middle name */
+
+        String fullName = firstName + " " + middleName.charAt(0) + ". " + lastName;
+
+        /* Format hourly rate */
+
+        NumberFormat hourlyRateFormat = NumberFormat.getCurrencyInstance();
+
+        /* Output processing */
+        System.out.println("==================================");
+        System.out.println("Need a " + jobTitle + "?");
+        System.out.println("CALL NOW! " + phoneNumberFormat);
+        System.out.println("Ask for " + fullName);
+        System.out.println("(Rates start at " + hourlyRateFormat.format(hourlyRate) + "/hr)");
+        System.out.println("==================================");
+
+        kbd.close();
+    }
+    
+}
+
+________________________________________________________________________________________________________________________
+Lab Activity 3
+
