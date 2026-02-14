@@ -143,3 +143,38 @@ public class AdGenerator
 ________________________________________________________________________________________________________________________
 Lab Activity 3
 
+/**
+ * This code will take the length of the sides of a triangle and calculate the area
+ * using Heron's formula.
+ * @author Amanda Halverson
+ */
+
+import java.util.Scanner;
+
+public class TriangleCalculator
+{
+    public static void main (String[] args)
+    {
+        Scanner kbd = new Scanner(System.in);
+
+        /* Input processing */
+        System.out.print("Enter the length of side 1: ");
+        double sideOne = kbd.nextDouble();
+        System.out.print("Enter the length of side 2: ");
+        double sideTwo = kbd.nextDouble();
+        System.out.print("Enter the length of side 3: ");
+        double sideThree = kbd.nextDouble();
+
+        /* Math processing - semiPer is semi-perimeter */
+        double semiPer = (sideOne + sideTwo + sideThree) / 2;
+        double heronsFormula = Math.sqrt(semiPer * (semiPer - sideOne) * (semiPer - sideTwo)
+            * (semiPer - sideThree));
+
+        /* Output processing */
+        System.out.print("Area: ");
+        System.out.printf("%.3f", heronsFormula);
+
+        kbd.close();
+    }
+    
+}
