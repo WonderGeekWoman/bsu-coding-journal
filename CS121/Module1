@@ -19,12 +19,14 @@ Do a websearch for the same recipe.
 Do any of those recipes match what Gemini gave you? I did not find cinnamon rolls, but found other rolls that did not contain sugar.
 	I found no roll recipes that had tomato and cinnamon
 
-3. Reflect on your experience. Unless you have previous experience baking, you probably couldn't just look at the recipe and figure out if it would be good. Note that even though tomatoes have no business being in cinnamon rolls, Gemini would give you what you asked. What does this tell you about the limitations of AI? How much should you trust the output of an AI?
+3. Reflect on your experience. Unless you have previous experience baking, you probably couldn't just look at the recipe and figure out if it would be good. Note that even though tomatoes have
+   no business being in cinnamon rolls, Gemini would give you what you asked. What does this tell you about the limitations of AI? How much should you trust the output of an AI?
 	I didn't want to use AI before this class. My lack of desire has not changed. It doesn't know everything, and it doesn't know what it doesn't know.
 
 **Part 2: Code Exploration
 
-1. Ask Gemini to create a solution in Java to solve the following problem. You need to write a program for a local orchard. They need something that will help them when selling trees. They need to be able to enter what tree was sold, track sales, and analyze the sales.
+1. Ask Gemini to create a solution in Java to solve the following problem. You need to write a program for a local orchard. They need something that will help them when selling trees. They need
+   to be able to enter what tree was sold, track sales, and analyze the sales.
 What does your program actually do? The problem description was somewhat vague, so there is room for interpretation. How do you know what your program does?
 	It supposedly tracks and analyzes sales. I can only know what it tells me at this point.
 Is the solution correct? How do you know? What did you do to test it?
@@ -53,10 +55,20 @@ To modify this program, if it was well constructed, you should have only needed 
 
 **Lab Activity 1
 So many issues, but I think I got it done!
-
 I had to get an extension for the lab because I could NOT figure out why I couldn't get VS Code to do what it was supposed to be doing. I talked with IT people, my professor, and Ben Peterson. Finally got it working. I will finish this lab in Kount just in case something goes awry again. It is still acting up, but should get it done.
 
+My Code:
+public class EmergencyTest
+{  
+    public static void main(String[] args)
+    {
+        System.out.println("An Emergency Broadcast");
+    }
+} 
+
 **Lab Activity 2
+My BugSquasher Results on EmergencyTest.java
+
 - change EmergencyTest to Test
     >Error: Could not find or load main class EmergencyTest
 - change Broadcast to broadcast
@@ -77,6 +89,63 @@ I had to get an extension for the lab because I could NOT figure out why I could
 - remove the last brace in the program
     >Syntax error, insert "}" to complete ClassBody
 
+
 **Lab Activity 3
 Cannot have a method call inside the class definition, it has to be inside a method.
 
+My code:
+
+public class PersonalBio 
+{
+    public static void main(String[] args)
+    {
+        System.out.println("Name: Amanda Halverson");
+        System.out.println("Birthday: February 9, 1977");
+        System.out.println("Hobbies: Singing, Crochet, Reading, Gaming");
+        System.out.println("Favorite Book: Too many genres and authors to love. But let's go with the whole Dragonrider Series by Anne McCafferey.");
+        System.out.println("Favorite Movie: Princess Bride and Emperor's New Groove...based on what I quote the most.");
+    }
+}
+
+______________________________________________GRADING______________________________________________________________________________
+
+# Module 1 - Lab Activity : cs121-s26-lab01  
+
+---
+
+## Grading Summary  
+Name: AMANDAHALVERSON  
+Date: Tue Jan 20 14:43:33 2026 -0700  
+Grade: 25/25  
+Comment: Excellent Work!  
+
+---
+
+## Activity 1 - Emergency Test  
+### Code Completeness (10/10)  
+**Criteria:**  Solution fully satisfies all requirements specified in the Problem Description and produces the expected output.  
+```
+- Integration Test - Output Check (An Emergency Broadcast): passed 
+```
+
+---
+
+## Activity 2 - BugSquasher  
+### Code Investigation (5/5)  
+**Criteria:**  Documentation accurately describes results from each test case  
+
+- Manual review completed successfully
+
+
+---
+
+## Activity 3 - PersonalBio  
+### Code Completeness (10/10)  
+**Criteria:**  Solution fully satisfies all requirements specified in the Problem Description and produces the expected output.  
+```
+- Integration Test - Output Check (Name Label): passed 
+- Integration Test - Output Check (Birthday Label): passed 
+- Integration Test - Output Check (Hobby Label): passed 
+- Integration Test - Output Check (Book Label): passed 
+- Integration Test - Output Check (Movie Label): passed 
+```
