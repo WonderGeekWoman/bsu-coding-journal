@@ -140,7 +140,7 @@ public class AdGenerator
     
 }
 
-________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________
 Lab Activity 3
 
 /**
@@ -178,3 +178,106 @@ public class TriangleCalculator
     }
     
 }
+
+_____________________________________________________GRADING______________________________________________________________________________
+
+# Module 3 - Lab Activity - Part 1 : cs121-s26-lab03-1  
+
+---
+
+## Grading Summary  
+Name: AMANDAHALVERSON  
+Date: Sat Feb 7 13:14:15 2026 -0700  
+Grade: 25/25  
+Comment: Excellent Work!  
+
+---
+
+## Lab Warmup - Account Generator  
+### Code Completeness (10/10)  
+**Criteria:**  Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.  
+```
+- Quality Test - Clean Build Check (AccountGenerator): passed 
+- Quality Test - Run Check (AccountGenerator): passed 
+- Integration Test - Output Check (Luke Hindman): passed 
+- Integration Test - Output Check (Grace Hopper): passed 
+- Integration Test - Output Check (Margaret Hamilton): passed 
+```
+
+---
+
+## Lab Activity 1 - Sphere Calculator  
+### Code Completeness (10/10)  
+**Criteria:**  Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.  
+```
+- Quality Test - Clean Build Check (SphereCalculator): passed 
+- Quality Test - Run Check (SphereCalculator): passed 
+- Integration Test - Check Volume (r = 150): passed 
+- Integration Test - Check Surface Area (r = 150): passed 
+- Integration Test - Check Volume (r = 723): passed 
+- Integration Test - Check Surface Area (r = 723): passed 
+- Integration Test - Check Volume (r = 16): passed 
+- Integration Test - Check Surface Area (r = 16): passed 
+```
+
+---
+
+## Overall Coding Style  
+### Coding Style Review (5/5)  
+**Criteria:**  Coding style is consistent with the specified Style Guide  
+
+- Manual review completed successfully
+
+
+________________________________________________________________________________________________________
+
+# Module 3 - Lab Activity - Part 2 : cs121-s26-lab03-2  
+
+---
+
+## Grading Summary  
+Name: AMANDAHALVERSON  
+Date: Sat Feb 14 13:27:32 2026 -0700  
+Grade: 25/25  
+Comment: Excellent Work!  
+
+---
+
+## Lab Activity 2 - Ad Generator  
+### Code Completeness (10/10)  
+**Criteria:**  Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.  
+```
+- Quality Test - Clean Build Check (AdGenerator): passed 
+- Quality Test - Run Check (AdGenerator): passed 
+- Integration Test - Output Check (Job Title: Cable Guy): passed 
+- Integration Test - Output Check (Formatted Name: Ernie C. Douglas): passed 
+- Integration Test - Output Check (Phone Number: (555) 823-3765): passed 
+- Integration Test - Output Check (Rate: $16.50/hr): passed 
+- Integration Test - Output Check (Job Title: Astronaut): passed 
+- Integration Test - Output Check (Formatted Name: Sally K. Ride): passed 
+- Integration Test - Output Check (Phone Number: (555) 823-3765): passed 
+- Integration Test - Output Check (Rate: $450.75/hr): passed 
+```
+
+---
+
+## Lab Activity 3 - Triangle Calculator  
+### Code Completeness (10/10)  
+**Criteria:**  Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.  
+```
+- Quality Test - Clean Build Check (TriangleCalculator): passed 
+- Quality Test - Run Check (TriangleCalculator): passed 
+- Integration Test - Check Area (10 11 12): passed 
+- Integration Test - Check Area (100 110 120): passed 
+- Integration Test - Check Area (3 4 5): passed 
+- Integration Test - Check Area (17 23 37): passed 
+```
+
+---
+
+## Overall Coding Style  
+### Coding Style Review (5/5)  
+**Criteria:**  Coding style is consistent with the specified Style Guide  
+
+- Manual review completed successfully
+
