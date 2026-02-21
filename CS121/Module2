@@ -1,3 +1,55 @@
+****WARM UP*****
+import java.util.Scanner;
+
+public class AverageOfThree
+{
+
+    public static void main(String[] args)
+    {
+        Scanner kbd = new Scanner(System.in);
+
+        System.out.print("Enter the first number: ");
+        int userFirstNumber = kbd.nextInt();
+        System.out.print("Enter the second number: ");
+        int userSecondNumber = kbd.nextInt();
+        System.out.print("Enter the third number: ");
+        int userThirdNumber = kbd.nextInt();
+
+        double average = ((double) userFirstNumber + userSecondNumber + userThirdNumber) / 3;
+
+        System.out.println("The average is: " + average);
+
+        /* Done wtih Scanner, so close it */
+        kbd.close();
+    }
+}
+
+
+*****LAB 1****
+import java.util.Scanner;
+
+public class FractionConverter
+{
+    
+    public static void main(String[] args)
+    {
+        Scanner kbd = new Scanner(System.in);
+
+        System.out.print("Enter the numerator: ");
+        int numerator = kbd.nextInt();
+        System.out.print("Enter the denominator: ");
+        int denominator = kbd.nextInt();
+
+        double floatPtEquiv = (numerator / (double) denominator);
+
+        System.out.println("Floating point equivalent: " + floatPtEquiv);
+
+        /* Don't forget to close the Scanner! */
+        kbd.close();
+    }
+}
+
+
 *****LAB 2*****
 
 import java.util.Scanner;
@@ -42,8 +94,8 @@ Total seconds: 7519
 
 
 
-
 *****LAB 3*****
+
 import java.util.Scanner;
 
 public class SecondsConverter
@@ -82,3 +134,104 @@ Enter the number of seconds: 9999
 Hours: 2
 Minutes: 46
 Seconds: 39
+
+
+
+_______________________________________GRADING_________________________________________________________________________________
+# Module 2 - Lab Activity - Part 1 : cs121-s26-lab02-1  
+
+---
+
+## Grading Summary  
+Name: AMANDAHALVERSON  
+Date: Sat Jan 24 17:44:58 2026 -0700  
+Grade: 25/25  
+Comment: Excellent Work!  
+
+---
+
+## Lab Warmup - Average Of Three  
+### Code Completeness (10/10)  
+**Criteria:**  Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.  
+```
+- Quality Test - Clean Build Check (AverageOfThree): passed 
+- Quality Test - Run Check (AverageOfThree): passed 
+- Integration Test - Output Check (15 16 13): passed 
+- Integration Test - Output Check (2 2 2): passed 
+- Integration Test - Output Check (1 2 3): passed 
+```
+
+---
+
+## Lab Activity 1 - Fraction Converter  
+### Code Completeness (10/10)  
+**Criteria:**  Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.  
+```
+- Quality Test - Clean Build Check (FractionConverter): passed 
+- Quality Test - Run Check (FractionConverter): passed 
+- Integration Test - Output Check (2/3): passed 
+- Integration Test - Output Check (1/2): passed 
+- Integration Test - Output Check (2/1): passed 
+- Integration Test - Output Check (0/3): passed 
+```
+
+---
+
+## Overall Coding Style  
+### Coding Style Review (5/5)  
+**Criteria:**  Coding style is consistent with the specified Style Guide  
+
+- This criteria was not evaluated
+
+____________________________________________________________________________________________
+
+# Module 2 - Lab Activity - Part 2 : cs121-s26-lab02-2  
+
+---
+
+## Grading Summary  
+Name: AMANDAHALVERSON  
+Date: Fri Jan 30 17:37:07 2026 -0700  
+Grade: 25/25  
+Comment: Excellent Work!  
+
+---
+
+## Lab Activity 2 - HMSConverter  
+### Code Completeness (10/10)  
+**Criteria:**  Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.  
+```
+- Quality Test - Clean Build Check (HMSConverter): passed 
+- Quality Test - Run Check (HMSConverter): passed 
+- Integration Test - Output Check (1 28 42): passed 
+- Integration Test - Output Check (0 0 53): passed 
+- Integration Test - Output Check (0 1 0): passed 
+- Integration Test - Output Check (1 0 0): passed 
+```
+
+---
+
+## Lab Activity 3 - Seconds Converter  
+### Code Completeness (10/10)  
+**Criteria:**  Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.  
+```
+- Quality Test - Clean Build Check (SecondsConverter): passed 
+- Quality Test - Run Check (SecondsConverter): passed 
+- Integration Test - Output Check (9999s check hours): passed 
+- Integration Test - Output Check (9999s check minutes): passed 
+- Integration Test - Output Check (9999s check seconds): passed 
+- Integration Test - Output Check (61s check hours): passed 
+- Integration Test - Output Check (61s check minutes): passed 
+- Integration Test - Output Check (61s check seconds): passed 
+- Integration Test - Output Check (0s check hours): passed 
+- Integration Test - Output Check (0s check minutes): passed 
+- Integration Test - Output Check (0s check seconds): passed 
+```
+
+---
+
+## Overall Coding Style  
+### Coding Style Review (5/5)  
+**Criteria:**  Coding style is consistent with the specified Style Guide  
+
+- This criteria was not evaluated
