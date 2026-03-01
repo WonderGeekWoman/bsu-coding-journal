@@ -1,0 +1,165 @@
+__________________________________Lab Activity 2___________________________________________
+
+import java.util.Scanner;
+
+/**
+ * Counts and prints the individual lower-case vowels and other characters in user-inputted string.
+ * @author Amanda Halverson
+ */
+
+public class VowelCounter
+{
+    /**
+     * Reads string from user and outputs as stated above.
+     * @param args
+     */
+
+    public static void main (String[] args)
+    {
+        /* Declare variables */
+
+        String userString;
+        int aTotal = 0;
+        int eTotal = 0;
+        int iTotal = 0;
+        int oTotal = 0;
+        int uTotal = 0;
+        int otherTotal = 0;
+
+        Scanner kbd = new Scanner (System.in);
+
+        /* Input processing */
+
+        System.out.println("Enter a string of characters:");
+        userString = kbd.nextLine();
+
+        /* Nested Loop processing */
+
+        for (int i = 0; i < userString.length(); i++)
+        {
+            switch (userString.charAt(i))
+            {
+                case 'a':
+                    aTotal++;
+                    break;
+                case 'e':
+                    eTotal++;
+                    break;
+                case 'i':
+                    iTotal++;
+                    break;
+                case 'o':
+                    oTotal++;
+                    break;
+                case 'u':
+                    uTotal++;
+                    break;
+                default:
+                    otherTotal++;
+                    break;
+            }
+        }
+        /* Output processing */
+
+        System.out.println();
+        System.out.println("Number of each lowercase vowel in the string:");
+        System.out.println("a: " + aTotal);
+        System.out.println("e: " + eTotal);
+        System.out.println("i: " + iTotal);
+        System.out.println("o: " + oTotal);
+        System.out.println("u: " + uTotal);
+        System.out.println("other characters: " + otherTotal);
+
+        kbd.close();
+    }
+}
+
+
+_______________________________Lab Activity 3________________________________________________
+
+import java.util.Scanner;
+import java.util.Random;
+
+/**
+ * This code is a Rock, Paper, Scissors game between user and computer.
+ * @author Amanda Halverson
+ */
+
+public class RockPaperScissors
+{
+    /**
+     * Reads user choice, computer randomly chooses, and compares to see who wins.
+     * @param args
+     */
+
+    public static void main (String[] args)
+    {
+           Scanner kbd = new Scanner (System.in);
+
+        /* Declare variables, Random computer choice, Input processing, Comparison/Game loop */
+
+        int userChoice = 0;
+        int result = 0;
+        char playAgain = 'y';
+        int compWin = 0;
+        int userWin = 0;
+        int tiedGame = 0;
+        
+        while (playAgain == 'y')
+        {
+            Random random = new Random();
+            int randChoice = random.nextInt(3) + 1;
+
+            System.out.print("Enter your choice - 1 for Rock, 2 for Paper, or 3 for Scissors: ");
+            userChoice = kbd.nextInt();
+
+            switch (randChoice)
+            {
+                case 1:
+                    System.out.println("Computer chooses Rock.");
+                    break;
+                case 2:
+                    System.out.println("Computer chooses Paper.");
+                    break;
+                case 3:
+                    System.out.println("Computer chooses Scissors.");
+                    break;
+            }
+
+            if (randChoice == userChoice)
+            {
+                System.out.println("We tied!");
+                tiedGame++;
+            }
+            else if ((userChoice == 1) && (randChoice == 3) ||
+                    (userChoice == 2) && (randChoice == 1) ||
+                    (userChoice == 3) && (randChoice == 2))
+            {
+                System.out.println("Human wins!");
+                userWin++;
+            }
+            else
+            {
+                System.out.println("Computer Wins!");
+                compWin++;
+            }
+            
+            System.out.println();
+            System.out.print("Play again? (y/n) ");
+            playAgain = kbd.next().charAt(0);
+            System.out.println();
+        }
+        /* Output processing */
+
+        String suffix1 = (userWin == 1) ? " time" : " times";
+        System.out.println("You won " + userWin + suffix1 + ".");
+
+        String suffix2 = (compWin == 1) ? " time" : " times";
+        System.out.println("You lost " + compWin + suffix2 + ".");
+
+        String suffix3 = (tiedGame== 1) ? " time" : " times";
+        System.out.println("We tied " + tiedGame + suffix3 + ".");
+        
+        kbd.close();
+    }
+}
