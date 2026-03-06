@@ -1,0 +1,81 @@
+___________________________________3/4/2026 Array Lists__________________________________
+
+/**
+ * Party Guest Checker
+ * @author Luke Hindman
+ */
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class PartyGuestChecker {
+    
+    public static void main(String[] args) {
+        /* Party Secret */
+        String partySecret = "wildhorses";
+
+        /* I need an arraylist guestList */
+        ArrayList<String> guestList = new ArrayList<String>();
+
+        /* I need a scanner */
+        Scanner kbd = new Scanner(System.in);
+
+        /* Host Setup */
+        hostSetup(kbd,guestList);
+
+        System.out.println("GuestList: " + guestList);
+
+        /* Party Mode */
+        partyMode(kbd, guestList, partySecret);
+    }
+
+    /**
+     * Host setup mode . Allow host to continue entering 
+     * names until they type the string "done"
+     * 
+     * @param myKbd Reference to keyboard Scanner instantiated in main()
+     * @param guests Reference to ArrayList instantiated in main()
+     */
+    public static void hostSetup(Scanner myKbd, ArrayList<String> guests) {
+        
+        String hostInput = "";
+        while (!hostInput.equals("done") ) {
+            /* Prompt the host for a name */
+            System.out.print("Please enter guest name, done when finished: ");
+            /* Capture host input */
+            hostInput = myKbd.nextLine();
+            /* Add name to guestlist */
+            if (!hostInput.equals("done")) {
+                guests.add(hostInput);
+            }
+            
+        }
+    }
+
+    /**
+     * Run an infinite loop that prompts guests for 
+     * their names to check if they are on the list
+     * @param myKbd Reference to Scanner instantiated in main()
+     * @param guests Reference to ArrayList<String> instantiated in main()
+     * @param secret Host secret that will end the party. 
+     */
+    public static void partyMode(Scanner myKbd, ArrayList<String> guests, String secret) {
+        /* Party Mode */
+        System.out.println("Party Mode!");
+        while (true) {
+            System.out.print("Please enter your name: ");
+            String guestInput = myKbd.nextLine();
+
+            /* Exit condition */
+            if (guestInput.equals(secret)) {
+                System.out.println("Time to end the party...");
+                break;
+            }
+
+            if (guests.contains(guestInput)) {
+                System.out.println("Welcome to the Party! :)");
+            } else {
+                System.out.println("Kick Rocks!");
+            }
+        }
+    }
+}
