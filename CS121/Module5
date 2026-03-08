@@ -1,0 +1,122 @@
+____________________________Lab WarmUp (uses QuickPick for main and LabUtility for methods)___________
+
+____________________________________QuickPick_________________________________________________________
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ * This code will ask the user for their name and a seed value to provide a reproducible
+ * set of lottery ticket numbers: five hyphenated numbers and a power pick number. The numbers
+ * will be two digits each, with two zero padding for single digit numbers. The numbers will be
+ * randomly chosen, but the same number can be used more than once on each ticket.
+ * 
+ * @author Amanda Halverson
+ */
+
+ public class QuickPick
+ {
+     public static void main(String[] args)
+     {
+        Scanner myKbd = new Scanner(System.in);
+
+        /* Get name from user */
+        String userName = LabUtility.getName(myKbd);
+
+        /* Get seed number from user */
+        long userSeed = LabUtility.getSeed(myKbd);
+
+        /* Print ticket */
+        System.out.println("\nHello " + userName + ",");
+        Random random = new Random(userSeed);
+        LabUtility.printTicket(random);
+
+      myKbd.close();
+     }
+ }
+
+_________________________________LabUtility_________________________________________________________
+
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ * This code contains the methods to use to get user name, user chosen seed numbeer and print five
+ * lottery numbers and a power pick.
+ * 
+ * @author Amanda Halverson
+ */
+
+public class LabUtility
+{
+
+    /**
+     * Prompt the user to enter their name then use the provided Scanner object to read the entire
+     * line of user input (including spaces) as a String and return this value to the caller.
+     * 
+     * @param kbd Scanner object bound to System.in
+     * @return String containing name
+     */
+
+    public static String getName(Scanner kbd)
+    {
+        System.out.print("Please enter your name: ");
+        String userName = kbd.nextLine();
+        return userName;
+    }
+
+    /** Prompt the user to enter a seed value, then use the provided Scanner object to read the entire
+     * line of user input as a String. Use the Long.parseLong() static method to convert the String
+     * to a long value. If the user enters a value that cannot be parsed as a long value, display
+     * an error message and prompt the user to enter the seed value again. Once a long value has been
+     * successfully read, return this value to the caller.
+     * 
+     * @param kbd Scanner object bound to System.in
+     * @return long value to be used as Random seed
+     */
+
+    public static long getSeed(Scanner kbd)
+    {
+        boolean needInput = true;
+        long seedLong = 0;
+                
+        while (needInput) {
+            System.out.print("Please enter a seed value: ");
+            String seed = kbd.nextLine();
+        
+            try {
+                seedLong = Long.parseLong(seed.trim());
+                needInput = false;
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Error: Please enter only whole numbers\n");
+            }
+        }
+        return seedLong;
+    }    
+
+    /** Use the provided Random object to generate five integer values in the range of 1-69 (inclusive)
+     * followed by one number in the range of 1-26 (inclusive) for the power pick. Print the resulting
+     * lottery ticket to the console using the following format pattern:
+     * 
+     * "%02d-%02d-%02d-%02d-%02d / %02d\n"
+     * 
+     * @param rnd Random object to use for ticket generation
+     */
+
+    public static void printTicket(Random rnd)
+    {
+        int number1 = rnd.nextInt(69) + 1;
+        int number2 = rnd.nextInt(69) + 1;
+        int number3 = rnd.nextInt(69) + 1;
+        int number4 = rnd.nextInt(69) + 1;
+        int number5 = rnd.nextInt(69) + 1;
+        int pick = rnd.nextInt(26)+1;        
+        
+        System.out.print("Your quick pick is: ");
+        System.out.printf("%02d-%02d-%02d-%02d-%02d / %02d\n", number1, number2, number3, number4, number5, pick);
+    }
+}
+
+____________________________________HousingCrunch main (also uses LabUtility for methods)__________________________________
+
+
