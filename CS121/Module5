@@ -1,6 +1,8 @@
+**Contains Lab WarmUp, Lab 1, Lab 2, & Lab 3**
+
 ____________________________Lab WarmUp (uses QuickPick for main and LabUtility for methods)___________
 
-____________________________________QuickPick_________________________________________________________
+____________________________________QuickPick main___________________________________________________
 import java.util.Random;
 import java.util.Scanner;
 
@@ -34,7 +36,7 @@ import java.util.Scanner;
      }
  }
 
-_________________________________LabUtility_________________________________________________________
+_________________________________LabUtility methods_________________________________________________________
 
 import java.util.Random;
 import java.util.Scanner;
@@ -117,6 +119,58 @@ public class LabUtility
     }
 }
 
-____________________________________HousingCrunch main (also uses LabUtility for methods)__________________________________
+_____________________________Lab 1: HousingCrunch main (also uses LabUtility for methods)__________________________
 
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Random;
+
+/**
+ * There is a housing crisis in Boise!! This code will ask the user for their name and a seed
+ * value to use in a randomizer to give the user advice on what type of home they should purchase.
+ * 
+ * @author Amanda Halverson
+ */
+
+ public class HousingCrunch
+ {
+     public static void main(String[] args)
+     {
+
+        /* Declare new Scanner named myKbd to capture user responses */
+        Scanner myKbd = new Scanner(System.in);
+
+        /* Declare new ArrayList named homeList to hold the types of homes */
+        ArrayList<String> homeList = new ArrayList<String>();
+
+        /* Populate ArrayList with home types */
+        homeList.add("mansion");
+        homeList.add("apartment");
+        homeList.add("shack");
+        homeList.add("house");
+
+        /* Get name from user */
+        String userName = LabUtility.getName(myKbd);
+
+        /* Get seed value from user */
+        long userSeed = LabUtility.getSeed(myKbd);
+        myKbd.close();
+
+        /* Declare new Random variable named rand */
+        Random rand = new Random(userSeed);        
+
+        /* Print result using seed value in randomizer to determine what type of home to buy*/
+        System.out.println("\nHello " + userName + ",");
+        int answer = rand.nextInt(homeList.size());
+        System.out.println("You should buy a " + (homeList.get(answer)) + ".");
+    }
+}
+
+____________________Guided Experimentation Notes_______________________________________________
+inserted into MagicEightBall.java
+         /**
+         * Read the ArrayList responses and prints each object in the list, one at a time,
+         * using displayDataset method.
+         */
+        displayDataset(responses);
 
