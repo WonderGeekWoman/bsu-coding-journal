@@ -174,3 +174,296 @@ inserted into MagicEightBall.java
          */
         displayDataset(responses);
 
+
+_____________________________Lab 2: HousingCrunch main (with UPDATED LabUtility below for methods)__________________________
+_______________________________________HousingCrunch main___________________________________________________
+import java.util.Scanner;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
+
+/**
+ * There is a housing crisis in Boise!! This code will ask the user for their name and a seed
+ * value to use in a randomizer to give the user advice on what type of home they should purchase.
+ * 
+ * @author Amanda Halverson
+ */
+
+ public class HousingCrunch
+ {
+     public static void main(String[] args)
+     {
+
+        /* Declare new Scanner named myKbd to capture user responses */
+        Scanner myKbd = new Scanner(System.in);
+
+        /* Get name from user */
+        String userName = LabUtility.getName(myKbd);
+
+        /* Get seed value from user */
+        long userSeed = LabUtility.getSeed(myKbd);
+
+        /* Declare new Random variable named rand */
+        Random rand = new Random(userSeed);
+      
+        /* Import new ArrayList named homeList from csv to hold the types of homes */
+        File csvFile = LabUtility.getFile(myKbd);
+        ArrayList<String> homeList = LabUtility.buildListFromCSV(csvFile,1);
+        myKbd.close();
+
+        /* Print result using seed value in randomizer to determine what type of home to buy*/
+        System.out.println("\nHello " + userName + ",");
+        int answer = rand.nextInt(homeList.size());
+        System.out.println("You should buy a " + (homeList.get(answer)) + ".");
+    }
+}
+
+__________________________________UPDATED LabUtility___________________________________________
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+
+/**
+ * This code contains the methods to use to get user name, user chosen seed numbeer and print five
+ * lottery numbers and a power pick.
+ * 
+ * @author Amanda Halverson
+ */
+
+public class LabUtility
+{
+    /**
+     * Prompt the user to enter their name then use the provided Scanner object to read the entire
+     * line of user input (including spaces) as a String and return this value to the caller.
+     * 
+     * @param kbd Scanner object bound to System.in
+     * @return String containing name
+     */
+
+    public static String getName(Scanner kbd)
+    {
+        System.out.print("Please enter your name: ");
+        String userName = kbd.nextLine();
+        return userName;
+    }
+
+    /** Prompt the user to enter a seed value, then use the provided Scanner object to read the entire
+     * line of user input as a String. Use the Long.parseLong() static method to convert the String
+     * to a long value. If the user enters a value that cannot be parsed as a long value, display
+     * an error message and prompt the user to enter the seed value again. Once a long value has been
+     * successfully read, return this value to the caller.
+     * 
+     * @param kbd Scanner object bound to System.in
+     * @return long value to be used as Random seed
+     */
+
+    public static long getSeed(Scanner kbd)
+    {
+        boolean needInput = true;
+        long seedLong = 0;
+                
+        while (needInput)
+        {
+            System.out.print("Please enter a seed value: ");
+            String seed = kbd.nextLine();
+        
+            try
+            {
+                seedLong = Long.parseLong(seed.trim());
+                needInput = false;
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println("Error: Please enter only whole numbers\n");
+            }
+        }
+        return seedLong;
+    }    
+
+    /** Use the provided Random object to generate five integer values in the range of 1-69 (inclusive)
+     * followed by one number in the range of 1-26 (inclusive) for the power pick. Print the resulting
+     * lottery ticket to the console using the following format pattern:
+     * 
+     * "%02d-%02d-%02d-%02d-%02d / %02d\n"
+     * 
+     * @param rnd Random object to use for ticket generation
+     */
+
+    public static void printTicket(Random rnd)
+    {
+        int number1 = rnd.nextInt(69) + 1;
+        int number2 = rnd.nextInt(69) + 1;
+        int number3 = rnd.nextInt(69) + 1;
+        int number4 = rnd.nextInt(69) + 1;
+        int number5 = rnd.nextInt(69) + 1;
+        int pick = rnd.nextInt(26)+1;        
+        
+        System.out.print("Your quick pick is: ");
+        System.out.printf("%02d-%02d-%02d-%02d-%02d / %02d\n", number1, number2,
+            number3, number4, number5, pick);
+    }
+
+    /**
+     * Prompt the user to enter a filename then use the provided Scanner object to read the entire
+     * line of user input as a String value. Use this value to create a new File object then use the
+     * exists() and isFile() methods to check that the user specified file is valid.  If the file
+     * does not exist or is not a file, display an error message and prompt the user again. If the
+     * file is valid, return the File object to the caller.
+     * 
+     * @param kbd Scanner object bound to System.in
+     * @return Valid File object that represents the filename entered by the user.
+     * */
+    public static File getFile(Scanner kbd)
+    {
+        boolean validFile = false;
+        File userFile;
+        do
+        {
+            System.out.print("Please enter the filename: ");
+            String fileName = kbd.nextLine();
+            userFile = new File(fileName);
+
+            if (userFile.exists() && userFile.isFile())
+            {
+                validFile = true;
+            }
+            else
+            {
+                System.out.println("Error: File does not exist.");
+            }
+        }
+        while (validFile == false);
+        return userFile;
+    }
+    /**
+     * This method begins by creating a new ArrayList of Strings. It then attaches a Scanner to the
+     * provided File object and uses a while loop to process the file line-by-line. For each line,
+     * this method creates a new Scanner object with a comma "," delimiter to enable access to the
+     * individual fields within the line using a second, inner while loop. As each field is processed
+     * it is tracked using a counter variable starting with field 1. If the current field is equal
+     * to the specified fieldFilter, the String value of the field is added to the list.  Once all
+     * the lines in the file have been processed, the ArrayList is returned to the caller.
+     * 
+     * If Scanner throws a FileNotFoundException when instantiating the new file Scanner object, catch
+     * the expection, display an error message, and exit the program immediately with an exit status of 1.
+     * 
+     * @param csvFile File object that contains the CSV database to process
+     * @param fieldFilter Field number to use for building the list
+     * @return ArrayList of strings that represents the desired column of data from the database.
+     */
+    public static ArrayList<String> buildListFromCSV(File database, int fieldFilter)
+    {
+        ArrayList<String> newList = new ArrayList<String>();
+        try
+        {
+            Scanner scanner = new Scanner(database);
+
+            while(scanner.hasNextLine())
+            {
+                String line = scanner.nextLine();
+                Scanner lineScanner = new Scanner(line);
+                lineScanner.useDelimiter(",");
+
+                int fieldCounter = 1;
+                while(lineScanner.hasNext())
+                {                
+                    String field = lineScanner.next();
+                    if (fieldCounter == fieldFilter)
+                    {
+                    newList.add(field);
+                    }
+                    fieldCounter++;
+                }
+                lineScanner.close();
+            }
+            scanner.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("Error: File does not exist");
+            System.exit(1);
+        }
+            return newList;
+    }
+}
+
+_____________________________________Lab 3 MASHGame (uses UPDATED Lab Utility above)__________________________________________________
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ * This code will allow the user to use every Gen Xer's favorite game...M.A.S.H., where he or she
+ * will receive predictions for who they will marry and where they will live. But there's a twist.
+ * After a certain number of years of marriage, they will recieve their dream job,
+ * how they will get there, and where they will move to.
+ * @author Amanda Halverson
+ */
+
+ public class MASHGame
+ {
+     public static void main(String[] args)
+     {
+        /* Declare new Scanner named myKbd to capture user responses */
+        Scanner myKbd = new Scanner(System.in);
+
+        /* Get name from user */
+        String userName = LabUtility.getName(myKbd);
+
+         /* Import new ArrayList named homeList from csv to hold the types of homes */
+        File csvFile = LabUtility.getFile(myKbd);
+        ArrayList<String> homeList = LabUtility.buildListFromCSV(csvFile,1);
+        myKbd.close();
+
+        /* Import new ArrayList named SpouseList1 from csv to hold first set of spouse names */
+        ArrayList<String> spouseList1 = LabUtility.buildListFromCSV(csvFile,2);
+
+        /* Import new ArrayList named SpouseList2 from csv to hold second set of spouse names */
+        ArrayList<String> spouseList2 = LabUtility.buildListFromCSV(csvFile,3);
+
+        /* Create new ArrayList named finalSpouseList to combine data from both spouseLists */
+        ArrayList<String> finalSpouseList = new ArrayList<String>();
+        finalSpouseList.addAll(spouseList1);
+        finalSpouseList.addAll(spouseList2);
+
+        /* Import new ArrayList named occupationList from csv to hold the types of occupations */
+        ArrayList<String> occupationList = LabUtility.buildListFromCSV(csvFile,4);
+
+        /* Import new ArrayList named transporationList from csv to hold the types of transportation */
+        ArrayList<String> transportationList = LabUtility.buildListFromCSV(csvFile,5);
+
+        /* Import new ArrayList named hometownList from csv to hold the types of hometowns */
+        ArrayList<String> hometownList = LabUtility.buildListFromCSV(csvFile,6);
+
+        Random rand = new Random();
+
+        /* Process the prediction */
+        System.out.println();
+        System.out.println("Welcome " + userName + ", this is your future...");
+
+        int randSpouse = rand.nextInt(finalSpouseList.size());
+        System.out.print("You will marry " + finalSpouseList.get(randSpouse));
+
+        int randHome = rand.nextInt(homeList.size());
+        System.out.println(" and live in a " + homeList.get(randHome) + ".");
+
+        int randNum = rand.nextInt(80) + 1;
+        System.out.print("After " + randNum + " years of marriage, you will finally get ");
+
+        int randJob = rand.nextInt(occupationList.size());
+        System.out.println("your dream job of being a " + occupationList.get(randJob) + ".");
+
+        randHome = rand.nextInt(homeList.size());
+        System.out.print("Your family will move to a " + homeList.get(randHome));
+
+        int randHometown = rand.nextInt(hometownList.size());
+        System.out.print(" in " + hometownList.get(randHometown));
+
+        int randTravel = rand.nextInt(transportationList.size());
+        System.out.println(" where you will " + transportationList.get(randTravel) + " to work each day.");
+     }
+ }
