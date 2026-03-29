@@ -1,1 +1,395 @@
+**Contains Lab WarmUp, Lab 1, Lab 2, & Lab 3  (all sections use FlowSample, with updates, for methods)**
 
+________________________________________Lab WarmUp________________________________________________________
+import java.util.Scanner;
+
+/**
+ * The FlowSampleEntry program uses a Scanner object to prompt the user for data values,
+ * creates a new FlowSample object, then calls each of the accessor methods and
+ * the toString method and displays the results in the console.
+ * @author Amanda Halverson
+ */
+
+public class FlowSampleEntry 
+{
+    public static void main(String[] args)
+    {
+        System.out.println("---------------------");
+        System.out.println("|    Data Entry     |");
+        System.out.println("---------------------");
+
+        Scanner kbd = new Scanner(System.in);
+
+        System.out.println("Please enter the following sample data values");
+        System.out.print("Agency: ");
+        String userAgency = kbd.nextLine();
+        System.out.print("Site Number: ");
+        String userSiteNumber = kbd.nextLine();
+        System.out.print("Timestamp: ");
+        String userTimestamp = kbd.nextLine();
+        System.out.print("Time Zone: ");
+        String userTimeZone = kbd.nextLine();
+
+        System.out.print("Flow Rate: ");
+        String userFlowRate = kbd.nextLine();
+        double flowRate = Double.parseDouble(userFlowRate);
+
+        System.out.print("Qualification Code: ");
+        String userQualCode = kbd.nextLine();
+
+        kbd.close();
+
+        
+        FlowSample mySample = new FlowSample(userAgency, userSiteNumber, userTimeZone, userQualCode, userTimestamp, flowRate);        
+
+        System.out.println("\n");
+        System.out.println("---------------------");
+        System.out.println("| Data Confirmation |");
+        System.out.println("---------------------");
+        System.out.println("You entered the following:");
+        System.out.println("Agency: " + mySample.getAgency());
+        System.out.println("Site Number: " + mySample.getSiteNumber());
+        System.out.println("Timestamp: " + mySample.getTimestamp());
+        System.out.println("UTC Timestamp: " + mySample.getUTCTimestamp());
+        System.out.println("Flow Rate: " + mySample.getFlowRate());
+        System.out.println("Qualification Code: " + mySample.getQualCode());
+    
+        System.out.println("\n");
+        System.out.println("---------------------");
+        System.out.println("| Sample Summary |");
+        System.out.println("---------------------");
+        System.out.println(mySample.toString());
+    }
+}
+____________________________________FlowSample original___________________________________________________
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
+/**
+ * FlowSample class represents a single, point-in-time snapshot of USGS river flow water data.
+ * Implementation for FlowSampleEntry program. Lab 6.
+ * @author Amanda Halverson
+ */
+
+public class FlowSample
+{
+    /* Instance variables */
+    private String agency, siteNumber, qualCode;
+    private double flowRate;
+    private Date timestamp;
+
+    /* Constructor */
+    public FlowSample(String agency, String siteNumber, String timeZone, String qualCode, String timestamp, double flowRate)
+    {
+        this.agency = agency;
+        this.siteNumber = siteNumber;
+        this.qualCode = qualCode;
+        this.flowRate = flowRate;
+
+        /* Create date formatter and parse */
+        SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        myFormatter.setTimeZone(TimeZone.getTimeZone(timeZone));
+
+        try
+        {
+        this.timestamp = myFormatter.parse(timestamp);
+        }
+        catch (ParseException e)
+        {
+        System.out.println("Error: Unable to parse timestamp: " + timestamp);
+        /* Initialize timestamp with the epoch, January 1, 1970, 00:00:000 GMT */
+        this.timestamp = new Date(0);
+        }
+    }
+
+    /* Accessor Methods */
+
+    /**
+     * Return the current Agency for the sample
+     * @return String containing agency
+     */
+    public String getAgency()
+    {
+        return this.agency;
+    }
+    
+    /**
+     * Return the Site Number for the sample
+     * @return String containing siteNumber
+     */
+    public String getSiteNumber()
+    {
+        return this.siteNumber;
+    }
+
+    /**
+     * Return the Flow Rate for the sample in cubic feet per second
+     * @return double containing flowRate
+     */
+    public double getFlowRate()
+    {
+        return this.flowRate;
+    }
+
+    /**
+     * Return the Qualification Code for the sample
+     * - "P" means provisional value, subject to change
+     * - "A" means approved value, ready for publication
+     * @return String containing qualCode
+     */
+    public String getQualCode()
+    {
+        return this.qualCode;
+    }
+
+     /**
+     * Return a String representation of the timestamp with the following custom format:
+     *      "EEE dd MMM yyyy hh:mm:ss a z"
+     * - The timezone value should remain unchanged 
+     * - Example: Thu 30 Dec 2021 02:30:00 PM MST
+     * @return Timestamp with custom format
+     */
+    public String getTimestamp()
+    {
+        SimpleDateFormat customFormatter = new SimpleDateFormat("EEE dd MMM yyyy hh:mm:ss a z");
+        return customFormatter.format(this.timestamp);
+    }
+
+    /**
+     * Return a String representation of the timestamp with the following custom format:
+     *      "EEE dd MMM yyyy hh:mm:ss a z"
+     * - The timezone value should adjusted to UTC
+     * - Example: Thu 30 Dec 2021 09:30:00 PM UTC
+     * @return UTC Timestamp with custom format
+     */
+    public String getUTCTimestamp()
+    {
+        SimpleDateFormat customFormatter = new SimpleDateFormat("EEE dd MMM yyyy hh:mm:ss a z");
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        customFormatter.setTimeZone(tz);
+        return customFormatter.format(this.timestamp);
+    }
+
+    /* toString */
+
+    /**
+     * Return a String representation of the current FlowSample object using the following template:
+     *      ### <agency> - <siteNumber> ###
+     *      Timestamp: <UTCTimeStamp>
+     *      Flow Rate: <flowRate>
+     * @return String value representing this FlowSample object
+     */
+    public String toString()
+    {
+       String output = "";
+       output += "### " + this.agency + " - " + this.siteNumber + " ###\n";
+       output += "Timestamp: " + this.getUTCTimestamp() + "\n";
+       output += "Flow Rate: " + this.getFlowRate() + "\n";
+       return output;
+    } 
+}
+__________________________________________Lab 1___________________________________________________________
+import java.util.Scanner;
+
+public class FlowSampleParser 
+{
+    public static void main(String[] args)
+    {
+        System.out.println("---------------------");
+        System.out.println("|    Data Entry     |");
+        System.out.println("---------------------");
+
+        Scanner kbd = new Scanner(System.in);
+        
+        System.out.println("Please enter the line of tab separated data:");
+        String dataLine = kbd.nextLine();
+
+        kbd.close();
+
+        FlowSample newSample = new FlowSample(dataLine);
+
+        System.out.println("\n");
+        System.out.println("---------------------");
+        System.out.println("| Data Confirmation |");
+        System.out.println("---------------------");
+        System.out.println("You entered the following:");
+        System.out.println("Agency: " + newSample.getAgency());
+        System.out.println("Site Number: " + newSample.getSiteNumber());
+        System.out.println("Timestamp: " + newSample.getTimestamp());
+        System.out.println("UTC Timestamp: " + newSample.getUTCTimestamp());
+        System.out.println("Flow Rate: " + newSample.getFlowRate());
+        System.out.println("Qualification Code: " + newSample.getQualCode());
+    
+        System.out.println("\n");
+        System.out.println("---------------------");
+        System.out.println("| Sample Summary |");
+        System.out.println("---------------------");
+        System.out.println(newSample.toString());        
+    }    
+}
+____________________________________FlowSample Update 1___________________________________________________
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+import java.util.TimeZone;
+
+/**
+ * FlowSample class represents a single, point-in-time snapshot of USGS river flow water data.
+ * Implementation for FlowSampleEntry program. Lab 6.
+ * @author Amanda Halverson
+ */
+
+public class FlowSample
+{
+    /* Instance variables */
+    private String agency, siteNumber, qualCode, userTime;
+    private double flowRate;
+    private Date timestamp;
+
+    /* Constructor 1 */
+    public FlowSample(String agency, String siteNumber, String timeZone, String qualCode, String timestamp, double flowRate)
+    {
+        this.agency = agency;
+        this.siteNumber = siteNumber;
+        this.qualCode = qualCode;
+        this.flowRate = flowRate;
+
+        /* Create date formatter and parse */
+        SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        myFormatter.setTimeZone(TimeZone.getTimeZone(timeZone));
+
+        try
+        {
+        this.timestamp = myFormatter.parse(timestamp);
+        }
+        catch (ParseException e)
+        {
+        System.out.println("Error: Unable to parse timestamp: " + timestamp);
+        /* Initialize timestamp with the epoch, January 1, 1970, 00:00:000 GMT */
+        this.timestamp = new Date(0);
+        }
+    }
+
+    /* Constructor 2 */
+    public FlowSample(String line)
+    {
+        Scanner kbd = new Scanner(line);
+        kbd.useDelimiter("\t");
+
+        this.agency = kbd.next();
+        this.siteNumber = kbd.next();
+        this.userTime = kbd.next();
+        String timeZone = kbd.next();
+        
+        /* Create date formatter and parse */
+        SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        myFormatter.setTimeZone(TimeZone.getTimeZone(timeZone));
+
+        try
+        {
+        this.timestamp = myFormatter.parse(userTime);
+        }
+        catch (ParseException e)
+        {
+        System.out.println("Error: Unable to parse timestamp: " + userTime);
+        /* Initialize timestamp with the epoch, January 1, 1970, 00:00:000 GMT */
+        this.timestamp = new Date(0);
+        }
+
+        String dataReading = kbd.next();
+        flowRate = Double.parseDouble(dataReading);
+
+        this.qualCode = kbd.next();
+
+        kbd.close();
+    }
+
+    /* Accessor Methods */
+
+    /**
+     * Return the current Agency for the sample
+     * @return String containing agency
+     */
+    public String getAgency()
+    {
+        return this.agency;
+    }
+    
+    /**
+     * Return the Site Number for the sample
+     * @return String containing siteNumber
+     */
+    public String getSiteNumber()
+    {
+        return this.siteNumber;
+    }
+
+    /**
+     * Return the Flow Rate for the sample in cubic feet per second
+     * @return double containing flowRate
+     */
+    public double getFlowRate()
+    {
+        return this.flowRate;
+    }
+
+    /**
+     * Return the Qualification Code for the sample
+     * - "P" means provisional value, subject to change
+     * - "A" means approved value, ready for publication
+     * @return String containing qualCode
+     */
+    public String getQualCode()
+    {
+        return this.qualCode;
+    }
+
+     /**
+     * Return a String representation of the timestamp with the following custom format:
+     *      "EEE dd MMM yyyy hh:mm:ss a z"
+     * - The timezone value should remain unchanged 
+     * - Example: Thu 30 Dec 2021 02:30:00 PM MST
+     * @return Timestamp with custom format
+     */
+    public String getTimestamp()
+    {
+        SimpleDateFormat customFormatter = new SimpleDateFormat("EEE dd MMM yyyy hh:mm:ss a z");
+        return customFormatter.format(this.timestamp);
+    }
+
+    /**
+     * Return a String representation of the timestamp with the following custom format:
+     *      "EEE dd MMM yyyy hh:mm:ss a z"
+     * - The timezone value should adjusted to UTC
+     * - Example: Thu 30 Dec 2021 09:30:00 PM UTC
+     * @return UTC Timestamp with custom format
+     */
+    public String getUTCTimestamp()
+    {
+        SimpleDateFormat customFormatter = new SimpleDateFormat("EEE dd MMM yyyy hh:mm:ss a z");
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        customFormatter.setTimeZone(tz);
+        return customFormatter.format(this.timestamp);
+    }
+
+    /* toString */
+
+    /**
+     * Return a String representation of the current FlowSample object using the following template:
+     *      ### <agency> - <siteNumber> ###
+     *      Timestamp: <UTCTimeStamp>
+     *      Flow Rate: <flowRate>
+     * @return String value representing this FlowSample object
+     */
+    public String toString()
+    {
+       String output = "";
+       output += "### " + this.agency + " - " + this.siteNumber + " ###\n";
+       output += "Timestamp: " + this.getUTCTimestamp() + "\n";
+       output += "Flow Rate: " + this.getFlowRate() + "\n";
+       return output;
+    } 
+}
