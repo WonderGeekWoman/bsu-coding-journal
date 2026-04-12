@@ -1,0 +1,340 @@
+** Contains Lab WarmUp, Lab 1, Lab 2, & Lab 3
+** All sections use ArrayUtilities, with updates as noted, for methods
+
+________________________________________Lab WarmUp____________________________________________________
+___________________________________NumberStats (driver)_______________________________________________
+import java.util.Scanner;
+
+/**
+ * NumberStats creates an array that is a user-specified size containing random numbers
+ * in the range of 1 to 100 (inclusive). The user will also specify a seed value so that
+ * the results generated are reproducable. This array of random numbers will be displayed,
+ * then used to generate a histogram that allows the user to visually inspect the frequency
+ * distribution of the set of random values.
+ * 
+ * @author Amanda Halverson
+ * @author Luke Hindman led via video
+ */
+
+public class NumberStats 
+{
+    public static void main(String[] args)
+    {
+        int numElements;
+        long seed;
+        Scanner kbd = new Scanner(System.in);
+
+        System.out.println("-----------------------------");
+        System.out.println("|   Simulation Parameters   |");
+        System.out.println("-----------------------------");
+        System.out.print("Please enter the desired number of random values: ");
+        numElements = kbd.nextInt();
+        System.out.print("Please enter the seed value: ");
+        seed = kbd.nextLong();
+
+        int[] myData = ArrayUtilities.generateRandomData(numElements, seed);
+
+        kbd.close();
+
+        System.out.println();
+        System.out.println("-----------------------------");
+        System.out.println("|     Generated Values      |");
+        System.out.println("-----------------------------");
+        ArrayUtilities.displayArray(myData);
+
+        System.out.println();
+        System.out.println("-----------------------------");
+        System.out.println("|         Histogram         |");
+        System.out.println("-----------------------------");
+        String myChart = ArrayUtilities.generateHistogram(myData);
+        System.out.println(myChart);
+    }
+}
+__________________________________ArrayUtilities (original)_________________________________________
+import java.util.Random;
+
+/**
+ * Utilities for working with arrays in Mod 7 Lab Warmup NumberStats driver.
+ * 
+ * @author Amanda Halverson
+ * @author Luke Hindman led via video
+ */
+
+public class ArrayUtilities
+{
+    /**
+     * Instantiate an integer array with the specified number of elements
+     * and initialize it with random numbers in the range of 1 - 100 (inclusive).
+     * Use the specified seed value to initialize the Random object.
+     * Return the array to the caller.
+     * 
+     * @param numElements Size of the array
+     * @param seeed Value used to seed the Random object
+     * @return int array initialized with random values
+     */
+    public static int[] generateRandomData(int numElements, long seed)
+    {
+        int[] data = new int[numElements];
+        Random rand = new Random(seed);
+
+        for (int i = 0; i < data.length; i++)
+        {
+            data[i] = rand.nextInt(100) + 1;
+        }
+
+        return data;
+    }
+
+    /**
+    * Display the contents of the specified integer array in the console on a single line,
+    * with commas separating the values as shown in the following example:
+    * 
+    *    83, 51, 77, 90, 96, 58, 35
+    * 
+    * Notice that there is not a comma following the last value.
+    * 
+    * @param data Array of integer data to be displayed
+    */
+    public static void displayArray(int[] data)
+    {
+        for (int i = 0; i < data.length; i++)
+        {
+            if (i == data.length - 1)
+            {
+                System.out.print(data[i]);
+            }
+            else
+            {
+                System.out.print(data[i] + ", ");
+            }
+        }
+        System.out.println();
+    }
+
+    /**
+    * Generate a String containing a histogram showing the distribution over the range
+    * of 1 - 100 (inclusive), divided into 10 bins of 10.
+    * The output should be formatted as shown in the lab guide.
+    * 
+    * @param data Array of interger values to be processed
+    * @return String containing the formatted histograom for the provided data.
+    */
+    public static String generateHistogram(int[] data)
+    {
+        String chart = "";
+        int[] bins = new int[10];
+
+        /* Gather bin data */
+        for (int i = 0; i < data.length; i++)
+        {
+            int binIndex = (data[i] - 1) / 10;
+            bins[binIndex]++;
+        }
+
+        /* Render histogram chart as String */
+        for (int i = 0; i < bins.length; i++)
+        {
+            int lower = (i * 10) + 1;
+            int upper = (i * 10) + 10;
+
+            chart += String.format("%3d - %3d | ", lower, upper);
+
+                for (int j = 0; j < bins[i]; j++)
+                {
+                    chart += "*";
+                }
+                chart += "\n";
+        }
+        return chart;
+    }
+}
+______________________________________________Lab 1______________________________________________________
+______________________________________BubbleSorter (driver)______________________________________________
+import java.util.Scanner;
+
+/**
+ * BubbleSorter creates an array that is a user-specified size containing random numbers
+ * in the range of 1 to 100 (inclusive). The user will also specify a seed value so that
+ * the results generated are reproducable. This array of random numbers will be displayed,
+ * then the contents of the array will be sorted in ascending order and displayed.
+ * 
+ * @author Amanda Halverson
+ */
+
+public class BubbleSorter
+{
+    public static void main(String[] args)
+    {
+        int numElements;
+        long seed;
+        Scanner kbd = new Scanner(System.in);
+
+        System.out.println("-----------------------------");
+        System.out.println("|   Simulation Parameters   |");
+        System.out.println("-----------------------------");
+        System.out.print("Please enter the desired number of random values: ");
+        numElements = kbd.nextInt();
+        System.out.print("Please enter the seed value: ");
+        seed = kbd.nextLong();
+
+        int[] myData = ArrayUtilities.generateRandomData(numElements, seed);
+
+        kbd.close();
+
+        System.out.println();
+        System.out.println("-----------------------------");
+        System.out.println("|     Generated Values      |");
+        System.out.println("-----------------------------");
+        ArrayUtilities.displayArray(myData);
+
+        System.out.println();
+        System.out.println("-----------------------------");
+        System.out.println("|        Sorted Values      |");
+        System.out.println("-----------------------------");
+        ArrayUtilities.sort(myData);
+        ArrayUtilities.displayArray(myData);
+        System.out.println();
+    }
+}
+____________________________________ArrayUtilities (v.2)____________________________________________
+import java.util.Random;
+
+/**
+ * Utilities for working with arrays in Mod 7 Lab 1 BubbleSorter driver.
+ * 
+ * @author Amanda Halverson
+ * @author Luke Hindman led generateRandomData, displayArray,
+ *      and generateHistogram methods via video
+ */
+
+public class ArrayUtilities
+{
+    /**
+     * Instantiate an integer array with the specified number of elements
+     * and initialize it with random numbers in the range of 1 - 100 (inclusive).
+     * Use the specified seed value to initialize the Random object.
+     * Return the array to the caller.
+     * 
+     * @param numElements Size of the array
+     * @param seeed Value used to seed the Random object
+     * @return int array initialized with random values
+     */
+    public static int[] generateRandomData(int numElements, long seed)
+    {
+        int[] data = new int[numElements];
+        Random rand = new Random(seed);
+
+        for (int i = 0; i < data.length; i++)
+        {
+            data[i] = rand.nextInt(100) + 1;
+        }
+
+        return data;
+    }
+
+    /**
+    * Display the contents of the specified integer array in the console on a single line,
+    * with commas separating the values as shown in the following example:
+    * 
+    *    83, 51, 77, 90, 96, 58, 35
+    * 
+    * Notice that there is not a comma following the last value.
+    * 
+    * @param data Array of integer data to be displayed
+    */
+    public static void displayArray(int[] data)
+    {
+        for (int i = 0; i < data.length; i++)
+        {
+            if (i == data.length - 1)
+            {
+                System.out.print(data[i]);
+            }
+            else
+            {
+                System.out.print(data[i] + ", ");
+            }
+        }
+        System.out.println();
+    }
+
+    /**
+    * Generate a String containing a histogram showing the distribution over the range
+    * of 1 - 100 (inclusive), divided into 10 bins of 10.
+    * The output should be formatted as shown in the lab guide.
+    * 
+    * @param data Array of interger values to be processed
+    * @return String containing the formatted histograom for the provided data.
+    */
+    public static String generateHistogram(int[] data)
+    {
+        String chart = "";
+        int[] bins = new int[10];
+
+        /* Gather bin data */
+        for (int i = 0; i < data.length; i++)
+        {
+            int binIndex = (data[i] - 1) / 10;
+            bins[binIndex]++;
+        }
+
+        /* Render histogram chart as String */
+        for (int i = 0; i < bins.length; i++)
+        {
+            int lower = (i * 10) + 1;
+            int upper = (i * 10) + 10;
+
+            chart += String.format("%3d - %3d | ", lower, upper);
+
+                for (int j = 0; j < bins[i]; j++)
+                {
+                    chart += "*";
+                }
+                chart += "\n";
+        }
+        return chart;
+    }
+    
+    /**
+    * Swap the values at the positions indicated by index1 and index2 within the data array.
+    * This method modifies the array referenced by the variable data. 
+    * Nothing is returned by the method.
+    * 
+    * @param index1 Position of value within data array to swap
+    * @param index2 Position of value within data array to swap
+    * @param data Reference to an array of integers containing values to be swapped
+    */
+    private static void swap(int index1, int index2, int[] data)
+    {
+        int tempVal = 0;
+
+        tempVal = data[index1];
+        data[index1] = data[index2];
+        data[index2] = tempVal;
+    }
+
+    /**
+    * Sort the integer values in the array refeferenced by data in ascending order using
+    * the Bubble Sort algorithm. This method modifies the array referenced by the variable data
+    * Nothing is returned by the method.
+    * 
+    * @param data Reference to an array of integers to be sorted
+    */
+    public static void sort(int[] data)
+    {
+        boolean done = false;
+
+        while (!done)
+        {
+            done = true;
+        
+            for(int i = 1; i < data.length; i++)
+            {
+                if (data[i-1] > data[i]){
+                    swap(i-1,i,data);
+                    done = false;
+                }
+            }
+        }
+    }
+}
