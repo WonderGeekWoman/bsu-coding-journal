@@ -1,5 +1,4 @@
-** Contains Lab WarmUp, Lab 1, Lab 2, & Lab 3
-** All sections use ArrayUtilities, with updates as noted, for methods
+** Contains Lab WarmUp, Lab 1, & Lab 2
 
 ________________________________________Lab WarmUp____________________________________________________
 ___________________________________NumberStats (driver)_______________________________________________
@@ -338,3 +337,7 @@ public class ArrayUtilities
         }
     }
 }
+
+_____________________________________________________Lab 2 Mandelbrot Set_______________________________________________________________
+____HindmanVisualizer, VisualizationPanel & Visualizer classes were given, as were the method titles and main method in Mandelbrot______
+
