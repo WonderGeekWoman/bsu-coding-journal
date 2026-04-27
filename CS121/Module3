@@ -1,4 +1,4 @@
-Lab Activity Warmup
+________________________________________Lab Activity Warmup______________________________________________
 
 /**
  * This code will generate a new username from user-input first and last names,
@@ -43,8 +43,8 @@ public class AccountGenerator
 }
 
 
-________________________________________________________________________________________________________________
-Lab Activity 1
+____________________________________________________Lab Activity 1____________________________________________________________
+
 
 /**
  * This code will take a user-inputted radius of a sphere and print the volume and
@@ -76,8 +76,8 @@ public class SphereCalculator
     }
 }
 
-____________________________________________________________________________________________________________
-Lab Activity 2
+___________________________________________________Lab Activity 2_________________________________________________________
+
 
 /**
  * This code will take input from a user and generate a job ad for publication.
@@ -140,8 +140,8 @@ public class AdGenerator
     
 }
 
-________________________________________________________________________________________________________
-Lab Activity 3
+_________________________________________________Lab Activity 3_______________________________________________________
+
 
 /**
  * This code will take the length of the sides of a triangle and calculate the area
