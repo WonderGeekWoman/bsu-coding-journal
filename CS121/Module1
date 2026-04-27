@@ -1,3 +1,5 @@
+______________________________________________Grading after all labs_______________________________________________________
+
 **Part 1: Explore AI Output
 
 1. Ask Gemini for a cinnamon roll recipe.
@@ -53,7 +55,7 @@ To modify this program, if it was well constructed, you should have only needed 
 **Notes on Reading Assignment**
 	"ln" is short for line. It is not In or 1n.
 
-**Lab Activity 1
+_________________________________________________Lab Activity 1_______________________________________________________
 So many issues, but I think I got it done!
 I had to get an extension for the lab because I could NOT figure out why I couldn't get VS Code to do what it was supposed to be doing. I talked with IT people, my professor, and Ben Peterson. Finally got it working. I will finish this lab in Kount just in case something goes awry again. It is still acting up, but should get it done.
 
@@ -66,7 +68,7 @@ public class EmergencyTest
     }
 } 
 
-**Lab Activity 2
+_________________________________________________Lab Activity 2_______________________________________________________
 My BugSquasher Results on EmergencyTest.java
 
 - change EmergencyTest to Test
@@ -89,8 +91,7 @@ My BugSquasher Results on EmergencyTest.java
 - remove the last brace in the program
     >Syntax error, insert "}" to complete ClassBody
 
-
-**Lab Activity 3
+_________________________________________________Lab Activity 3_______________________________________________________
 Cannot have a method call inside the class definition, it has to be inside a method.
 
 My code:
@@ -107,7 +108,7 @@ public class PersonalBio
     }
 }
 
-______________________________________________GRADING______________________________________________________________________________
+_____________________________________________________________GRADING_______________________________________________________________
 
 # Module 1 - Lab Activity : cs121-s26-lab01  
 
@@ -137,7 +138,7 @@ Comment: Excellent Work!
 - Manual review completed successfully
 
 
----
+_______________
 
 ## Activity 3 - PersonalBio  
 ### Code Completeness (10/10)  
