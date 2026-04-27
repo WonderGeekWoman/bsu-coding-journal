@@ -1,0 +1,293 @@
+______________________________________Lab Warmup______________________________________________
+import javax.swing.*;
+import javax.swing.plaf.DimensionUIResource;
+import java.awt.*;
+import java.awt.event.*;
+import java.text.DecimalFormat;
+
+/**
+ * SphereCalculator prompts the user for the radius of a sphere and calculates
+ * its volume and surface area.
+ * @author Amanda Halverson following video by Luke Hindman
+ */
+
+public class SphereCalculator extends JPanel
+{
+    /* Instance Variables */
+    private JTextField radiusField;     // Holds radius input value
+    private JButton calcButton;         // Triggers calculation
+    private JLabel volumeLabel;         // Label for volume result
+    private JLabel surfaceAreaLabel;    // Label for surface area result
+    private JLabel radiusLabel;         // Label for radius prompt
+    
+    /* Constructor */
+    public SphereCalculator()
+    {
+        /* Instantiate/initialize instance variables */
+        this.radiusField = new JTextField(5);
+        this.calcButton = new JButton("Calculate");
+        this.volumeLabel = new JLabel("Volume: ");
+        this.surfaceAreaLabel = new JLabel("Surface Area: ");
+        this.radiusLabel = new JLabel("Radius:  ");
+
+        /* Set up listeners */
+        ActionListener myListener = new SphereListener();
+        this.radiusField.addActionListener(myListener);
+        this.calcButton.addActionListener(myListener);
+
+        /* Radius entry subpanel */
+        JPanel radiusEntrySubPanel = new JPanel();
+        radiusEntrySubPanel.setLayout(new BoxLayout(radiusEntrySubPanel, BoxLayout.X_AXIS));
+        radiusEntrySubPanel.add(radiusLabel);
+        radiusEntrySubPanel.add(radiusField);
+
+        /* Results subpanel */
+        JPanel resultsSubPanel = new JPanel();
+        resultsSubPanel.setLayout(new BoxLayout(resultsSubPanel, BoxLayout.Y_AXIS));
+        resultsSubPanel.add(Box.createVerticalGlue());
+        resultsSubPanel.add(volumeLabel);
+        resultsSubPanel.add(surfaceAreaLabel);
+        resultsSubPanel.add(Box.createVerticalGlue());
+         
+        /* Setup top-level panel */
+        setPreferredSize(new DimensionUIResource(400,100));
+        setLayout(new BorderLayout());
+        add(radiusEntrySubPanel, BorderLayout.NORTH);
+        add(this.calcButton, BorderLayout.EAST);
+        add(resultsSubPanel, BorderLayout.CENTER);
+    }
+
+    /* Other Methods */
+    /** Calculates surface area and volume of sphere with given radius, and updates labels
+     * @param radius Radius of sphere
+    */
+    private void updateCalculation(double radius)
+    {
+        double sphereVolume = (4.0 / 3.0 * Math.PI * Math.pow(radius, 3));
+        double sphereSurfaceArea = 4 * Math.PI * Math.pow(radius, 2);
+
+        DecimalFormat myFormat = new DecimalFormat("#,###,###.####");
+
+        volumeLabel.setText("Volume: " + myFormat.format(sphereVolume));
+        surfaceAreaLabel.setText("Surface Area: " + myFormat.format(sphereSurfaceArea));
+    }
+
+    /* Button Listener */
+    private class SphereListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            /* Get text from radiusField as String and store in userRadius variable */
+            String userRadius = radiusField.getText();
+
+            /* Error handling */
+            try
+            {
+                /* Parse String into Double (if possible) and store in radius variable */
+                double radius = Double.parseDouble(userRadius);
+
+                /* Catch and reject negative numbers after parsing and don't calculate */
+                if (radius < 0 )
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter positive values only!");
+                    radiusField.setText("");
+                }
+                else
+                {
+                    /* Pass in radius, do calculations, format, update information on labels */
+                    updateCalculation(radius);
+                }
+            }
+            catch (NumberFormatException err)
+            {
+                JOptionPane.showMessageDialog(null, "Please enter numbers only!");
+                radiusField.setText("");
+            }
+        }
+    }
+
+    /**
+     * MAIN DRIVER
+     */
+    public static void main (String[] args)
+    {
+        JFrame myFrame = new JFrame("SphereCalculator...TADA!!");
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        /* Add a panel to the frame */
+        JPanel myPanel = new SphereCalculator();
+        myFrame.getContentPane().add(myPanel);
+
+        myFrame.pack();
+        myFrame.setVisible(true);
+    }
+}
+
+_______________________________________Lab 1__________________________________________________
+import javax.swing.*;
+import javax.swing.plaf.DimensionUIResource;
+import java.awt.event.*;
+import java.text.DecimalFormat;
+
+/**
+ * TriangleCalculator prompts the user for three side lengths and calculates
+ * the area of the triangle. Errors are handled when negative numbers or non-numbers
+ * are inputted, and if the three sides do not make a triangle.
+ * @author Amanda Halverson
+ */
+
+public class TriangleCalculator extends JPanel
+{
+    /* Instance Variables */
+    private JPanel panel;
+    private JTextField sideAField;      // Holds sideA input value
+    private JTextField sideBField;      // Holds sideB input value
+    private JTextField sideCField;      // Holds sideC input value
+    private JButton calcButton;         // Triggers calculation
+    private JLabel sideALabel;          // Label for sideA
+    private JLabel sideBLabel;          // Label for sideB
+    private JLabel sideCLabel;          // Label for sideC
+    private JLabel areaLabel;           // Label for triangle area result
+    
+    /* Constructor */
+    public TriangleCalculator()
+    {
+        /* Instantiate/initialize instance variables */
+        this.sideAField = new JTextField(5);
+        this.sideBField = new JTextField(5);
+        this.sideCField = new JTextField(5);
+        this.calcButton = new JButton("Calculate");
+        this.sideALabel = new JLabel("Side a: ");
+        this.sideBLabel = new JLabel("Side b: ");
+        this.sideCLabel = new JLabel("Side c: ");
+        this.areaLabel = new JLabel("Triangle Area: ");
+
+        /* Set up listener */
+        ActionListener myListener = new TriangleListener();
+        this.calcButton.addActionListener(myListener);
+
+        /* Side one entry subpanel */
+        JPanel sideASubPanel = new JPanel();
+        sideASubPanel.setLayout(new BoxLayout(sideASubPanel, BoxLayout.X_AXIS));
+        sideASubPanel.add(sideALabel);
+        sideASubPanel.add(sideAField);
+
+        /* Side two entry subpanel */
+        JPanel sideBSubPanel = new JPanel();
+        sideBSubPanel.setLayout(new BoxLayout(sideBSubPanel, BoxLayout.X_AXIS));
+        sideBSubPanel.add(sideBLabel);
+        sideBSubPanel.add(sideBField);
+
+        /* Side three entry subpanel */
+        JPanel sideCSubPanel = new JPanel();
+        sideCSubPanel.setLayout(new BoxLayout(sideCSubPanel, BoxLayout.X_AXIS));
+        sideCSubPanel.add(sideCLabel);
+        sideCSubPanel.add(sideCField);
+
+        /* Entry subpanel */
+        JPanel entrySubPanel = new JPanel();
+        entrySubPanel.setLayout(new BoxLayout(entrySubPanel, BoxLayout.Y_AXIS));
+        entrySubPanel.add(sideASubPanel);
+        entrySubPanel.add(sideBSubPanel);
+        entrySubPanel.add(sideCSubPanel);
+        entrySubPanel.add(calcButton);
+
+        /* Results subpanel */
+        JPanel resultsSubPanel = new JPanel();
+        resultsSubPanel.setLayout(new BoxLayout(resultsSubPanel, BoxLayout.Y_AXIS));
+        resultsSubPanel.add(areaLabel);
+         
+        /* Setup top-level panel */
+        panel = new JPanel();
+        setPreferredSize(new DimensionUIResource(350,120));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        add(entrySubPanel);
+        add(resultsSubPanel);
+    }
+
+    /* Other Methods */
+    /** Calculates area of triangle with user-given sides, and updates label
+     * @param sideA user first side
+     * @param sideB user second side
+     * @param sideC user third side
+    */
+    private void updateCalculation(double sideA, double sideB, double sideC)
+    {
+        double perimeter = (sideA + sideB + sideC) / 2;
+        double triangleArea = Math.sqrt(perimeter * (perimeter - sideA) * (perimeter - sideB)
+            * (perimeter - sideC));
+        if (!(sideA + sideB > sideC) || !(sideA + sideC > sideB) || !(sideB + sideC > sideA))
+        {
+            JOptionPane.showMessageDialog(null, "Side lengths do not form a triangle!");
+            sideAField.setText("");
+            sideBField.setText("");
+            sideCField.setText("");
+        }
+        else
+        {
+            DecimalFormat myFormat = new DecimalFormat("#,###,###.###");
+
+            areaLabel.setText("Triangle Area: " + myFormat.format(triangleArea));
+        }
+    }
+
+    /* Button Listener */
+    private class TriangleListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            /* Get text from all three side fields as Strings and store in variables */
+            String userSideA = sideAField.getText();
+            String userSideB = sideBField.getText();
+            String userSideC = sideCField.getText();
+
+            /* Error handling */
+            try
+            {
+                /* Parse String into Double (if possible) and store in new variables */
+                double sideA = Double.parseDouble(userSideA);
+                double sideB = Double.parseDouble(userSideB);
+                double sideC = Double.parseDouble(userSideC);
+
+                /* Catch and reject negative numbers after parsing and don't calculate */
+                if (sideA < 0 || sideB < 0 || sideC < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter positive values only!");
+                    sideAField.setText("");
+                    sideBField.setText("");
+                    sideCField.setText("");
+                }
+                else
+                {
+                    /* Pass in side lengths, do calculations, format, update information */
+                    updateCalculation(sideA, sideB, sideC);
+                }
+            }
+            catch (NumberFormatException err)
+            {
+                JOptionPane.showMessageDialog(null, "Please enter numbers only!");
+                sideAField.setText("");
+                sideBField.setText("");
+                sideCField.setText("");
+            }
+        }
+    }
+
+    /**
+     * MAIN DRIVER
+     */
+    public static void main (String[] args)
+    {
+        JFrame myFrame = new JFrame("Triangle Calculator by Amanda Halverson!");
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        /* Add a panel to the frame */
+        JPanel myPanel = new TriangleCalculator();
+        myFrame.getContentPane().add(myPanel);
+
+        myFrame.pack();
+        myFrame.setVisible(true);
+    }
+}
