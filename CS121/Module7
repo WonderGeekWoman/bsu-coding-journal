@@ -1,5 +1,7 @@
 ** Contains Lab WarmUp, Lab 1, & Lab 2
 
+______________________________________________Grading after all labs_______________________________________________________
+
 ________________________________________Lab WarmUp____________________________________________________
 ___________________________________NumberStats (driver)_______________________________________________
 import java.util.Scanner;
@@ -338,6 +340,347 @@ public class ArrayUtilities
     }
 }
 
-_____________________________________________________Lab 2 Mandelbrot Set_______________________________________________________________
-___HindmanVisualizer, VisualizationPanel & Visualizer classes were given, as were the method signatures and main method in Mandelbrot___
+_______________________________________________________Lab 2 Mandelbrot Set_______________________________________________________________
+________________HindmanVisualizer, VisualizationPanel & Visualizer classes were given, as were the variables;_________________
+____generateColorPalette, generateMandelbrotSet, mandelbrot as pseudocode algorithms; and main method in Mandelbrot Driver____
 
+_______________________________________Mandelbrot Driver____________________________________________
+import java.awt.Color;
+import java.awt.Dimension;
+
+/**
+ * This Mandelbrot program will generate a Mandelbrot set in a two-dimensional array
+ * of integer values. It will use colors to visualize the stability of the iterations
+ * and where cells fall out of the set.
+ * @author Amanda Halverson
+ */
+public class Mandelbrot implements HindmanVisualizer
+{
+    /* Instance Variables (and constants) */
+	private final int DISPLAY_WIDTH = 600;
+	private final int DISPLAY_HEIGHT = 400;
+	private final int MAX_ITERATIONS = 255;
+	private final double REAL_START = -2.0;
+	private final double REAL_END = 1;
+	private final double IMAGINARY_START = -1;
+	private final double IMAGINARY_END = 1;
+
+	private int[][] simData;
+	private Color[] colorPalette;
+
+    /* Constructor */
+	public Mandelbrot()
+	{
+		this.simData = new int[DISPLAY_HEIGHT][DISPLAY_WIDTH];
+		this.colorPalette = new Color[MAX_ITERATIONS + 1];
+
+		generateMandelbrotSet();
+
+		generateColorPalette();
+	}
+
+    /* Private Helper Methods */
+
+	/**
+	 * Generate the Mandelbrot set
+	 * @param x0
+	 * @param y0
+	 * @return iteration
+	 */
+	private int mandelbrot(double x0, double y0)
+	{
+		double x = 0.0;
+        double y = 0.0;
+
+        int iteration = 0;
+        int maxIteration = MAX_ITERATIONS;
+
+        while ((x * x + y * y <= 2 * 2) && (iteration < maxIteration))
+		{
+            double xtemp = x * x - y * y + x0;
+            y = 2 * x * y + y0;
+            x = xtemp;
+            iteration = iteration + 1;
+		}
+        return iteration;
+	}
+
+	/**
+	 * Store Mandelbrot values in the two-dimensional simulation data array
+	 */
+	private void generateMandelbrotSet()
+	{
+		int numRows = DISPLAY_HEIGHT;
+        int numCols = DISPLAY_WIDTH;
+
+        for (int row = 0; row < numRows; row++)
+		{
+            for (int col = 0; col < numCols; col++)
+			{
+                double x0 = REAL_START + (col / (double)numCols) * (REAL_END - REAL_START);
+                double y0 = IMAGINARY_START + (row / (double)numRows)* (IMAGINARY_END - IMAGINARY_START);
+
+                int m = mandelbrot(x0, y0);
+                simData[row][col] = m;
+			}
+		}
+	}
+
+	/**
+	 * Generate color palette and store the values in the single dimensional color palette array
+	 */
+	private void generateColorPalette()
+	{
+        for (int x = 0; x < colorPalette.length; x++)
+		{
+            float hue = 255 * (x / (float) MAX_ITERATIONS);
+            int saturation = 255;
+            int brightness = 255;
+
+            colorPalette[x] = Color.getHSBColor(hue/255f, saturation/255f, brightness/255f);
+
+		    colorPalette[MAX_ITERATIONS] = Color.BLACK;
+		}
+	}
+
+    /* Interface Methods */
+	@Override
+	public Color[] getColorPalette()
+	{
+		return colorPalette;
+	}
+
+	@Override
+	public int[][] getDataset()
+	{
+		return simData;
+	}
+
+	@Override
+	public Dimension getDimensions()
+	{
+		return new Dimension(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+	}
+
+
+    /* Driver */
+    public static void main(String[] args)
+	{
+        Mandelbrot fractal = new Mandelbrot();
+        Visualizer vis = new Visualizer(fractal);
+        vis.start();
+    }
+}
+
+__________________________________________HindmanVisualizer_________________________________________
+
+import java.awt.Color;
+import java.awt.Dimension;
+
+public interface HindmanVisualizer
+{
+        /**
+     * Array of Color objects that define the color palette
+     *    to use for visualizing the data set. The elements
+     *    in this array must map to all the possible values
+     *    stored in the associated two dimensional dataset.
+     *  
+     *    Therefore the size of this array MUST be at least 
+     *    one more than the highest possible value in the
+     *    dataset. For instance, if the highest possible 
+     *    value is 255, than the size of this array must be
+     *    256.
+     * 
+     * @return array of Color objects
+     */
+    public Color[] getColorPalette();
+    
+    /**
+     * Two dimensional array of integer values in the range 
+     *     of 0 - 255 (inclusive), representing the data to
+     *     be visualized.
+     * @return 2d array of simulation data
+     */
+    public int[][] getDataset();
+
+    /**
+     * Provide a Dimension object that describes the simulation
+     *     width (numCols) and height (numRows). This should 
+     *     coorespond to the dimensions of the 2d array of 
+     *     simulation data.
+     * @return dimensions of simulation
+     */
+    public Dimension getDimensions();
+}
+
+__________________________________________VisualizationPanel________________________________________
+import java.awt.*;
+import javax.swing.*;
+
+/**
+ * This panel serves as a surface to visualize our data using the
+ *   2d graphics package. Not an optimal solution, but it serves to
+ *   demonstrate 2d arrays in CS121. :)
+ * @author Luke Hindman
+ */
+@SuppressWarnings("serial")
+public class VisualizationPanel extends JPanel
+{
+    private int[][] dataset;
+    private Color[] palette;
+
+    public VisualizationPanel(int[][] dataset, Color[] palette)
+    {
+        this.dataset = dataset;
+        this.palette = palette;
+
+        if (this.palette == null)
+        {
+            this.palette = buildGrayScalePalette();
+        }
+    }
+ 
+    @Override
+    public void paintComponent(Graphics g)
+    {
+        Graphics2D pen = (Graphics2D) g;
+
+        for(int row = 0; row < this.dataset.length; row++)
+        {
+            for (int col = 0; col < this.dataset[row].length; col++)
+            {
+                int locationValue = this.dataset[row][col];
+                
+                Color locationColor;
+                if (locationValue < this.palette.length)
+                {
+                    locationColor = this.palette[locationValue];
+                } else
+                {
+                    locationColor = this.palette[palette.length-1];
+                }
+                
+                Rectangle current = new Rectangle(col,row,1,1);
+                pen.setColor(locationColor);
+                pen.fill(current);
+            }
+        }
+    }
+
+    private Color[] buildGrayScalePalette()
+    {
+        Color[] palette = new Color[256];
+
+        for (int i = 0; i < 256; i++)
+        {
+            palette[i] = new Color(255-i,255-i,255-i);
+        }
+        return palette;
+    }
+}
+
+_______________________________________________Visualizer____________________________________________
+import javax.swing.*;
+
+/**
+ *  Wrapper class to setup JFrame and visualization Panel 
+ *  This is used to demonstrate interfaces and 2d arrays
+ *  in CS121. Spring 2022.
+ * 
+ * @author Luke Hindman
+ */
+
+public class Visualizer
+{
+    /* instance variables */
+    private JFrame visFrame;
+    private JPanel visPanel;
+
+    /* Constructor */
+    public Visualizer(HindmanVisualizer simulation)
+    {
+        /* Visualization Panel */
+        visPanel = new VisualizationPanel(simulation.getDataset(),simulation.getColorPalette());
+        visPanel.setPreferredSize(simulation.getDimensions());
+
+        /* Build the GUI Frame */
+        visFrame = new JFrame("Hindman Data Visualizer");
+        visFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        visFrame.add(visPanel);
+        visFrame.setResizable(false);
+        visFrame.pack();
+    }
+
+    /* Other methods */
+    public void start()
+    {
+        visFrame.setVisible(true);
+    }
+}
+
+______________________________________________Grading_______________________________________________________
+
+Module 7 - Lab Activity - Part 1 : cs121-s26-lab07-1
+Grading Summary
+Name: AMANDAHALVERSON
+Date: Sat Apr 11 19:58:32 2026 -0600
+Grade: 25/25
+Comment: Excellent Work!
+
+Lab Warmup - Number Stats
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (NumberStats): passed 
+- Quality Test - Run Check (NumberStats): passed 
+- Integration Test - Check Generated Values (count:25 seed:123): passed 
+- Integration Test - Check Histogram (count:25 seed:123): passed 
+- Integration Test - Check Generated Values (count:12 seed:456): passed 
+- Integration Test - Check Histogram (count:12 seed:456): passed 
+- Integration Test - Check Generated Values (count:42 seed:42): passed 
+- Integration Test - Check Histogram (count:42 seed:42): passed 
+Lab Activity 1 - Bubble Sorter
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (BubbleSorter): passed 
+- Quality Test - Run Check (BubbleSorter): passed 
+- Integration Test - Check Generated Output (count:25 seed:123): passed 
+- Integration Test - Check Sorted Output (count:25 seed:123): passed 
+- Integration Test - Check Generated Values (count:12 seed:456): passed 
+- Integration Test - Check Sorted Values (count:12 seed:456): passed 
+- Integration Test - Check Generated Values (count:42 seed:42): passed 
+- Integration Test - Check Sorted Values (count:42 seed:42): passed 
+Overall Coding Style
+Coding Style Review (5/5)
+Criteria: Coding style is consistent with the specified Style Guide
+
+Manual review completed successfully
+__________________
+
+Module 7 - Lab Activity - Part 2 : cs121-s26-lab07-2
+Grading Summary
+Name: AMANDAHALVERSON
+Date: Sat Apr 18 19:47:08 2026 -0600
+Grade: 25/25
+Comment: Excellent Work!
+
+Lab Activity 2 - Mandelbrot
+Code Completeness (20/20)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (Mandelbrot): passed 
+- Quality Test - Run Check (Mandelbrot): passed 
+- Integration Test - Manual Test (Generate Grayscale Fractal): passed 
+- Integration Test - Manual Test (Generate Color Fractal): passed 
+Overall Coding Style
+Coding Style Review (5/5)
+Criteria: Coding style is consistent with the specified Style Guide
+
+Manual review completed successfully
+Results
+Grayscal Mandelbrot
+Mandelbrot Gray
+
+Color Mandelbrot
+Mandelbrot Color
