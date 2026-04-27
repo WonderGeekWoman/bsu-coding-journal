@@ -1,6 +1,6 @@
-**Contains Lab WarmUp, Lab 1, Lab 2, & Lab 3**
+______________________________________________Grading after all labs_______________________________________________________
 
-____________________________Lab WarmUp (uses QuickPick for main and LabUtility for methods)___________
+____________________________Lab WarmUp (uses QuickPick for main and LabUtility for methods)___________________
 
 ____________________________________QuickPick main___________________________________________________
 import java.util.Random;
@@ -467,3 +467,73 @@ import java.util.Scanner;
         System.out.println(" where you will " + transportationList.get(randTravel) + " to work each day.");
      }
  }
+
+______________________________________________Grading_______________________________________________________
+Module 5 - Lab Activity - Part 1 : cs121-s26-lab05-1
+Grading Summary
+Name: AMANDAHALVERSON
+Date: Sat Mar 7 21:38:29 2026 -0700
+Grade: 25/25
+Comment: Excellent Work!
+
+Lab Warmup - Quick Pick
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (QuickPick): passed 
+- Quality Test - Run Check (QuickPick): passed 
+- Integration Test - Name Check (name: Luke seed: 123): passed 
+- Integration Test - Quick Pick Check (name: Luke seed: 123): passed 
+- Integration Test - Quick Pick Check (name: Luke seed: 76281564): passed 
+- Integration Test - Error Message Check (name: Luke seed: bob): passed 
+- Integration Test - Reprompt on Error Check (name: Luke seed: bob seed: 12.3 seed: 123): passed 
+Lab Activity 1 - Housing Crunch
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (HousingCrunch): passed 
+- Quality Test - Run Check (HousingCrunch): passed 
+- Integration Test - Name Check (name: Luke seed: 123): passed 
+- Integration Test - Housing Selection Check (name: Luke seed: 123): passed 
+- Integration Test - Housing Selection Check (name: Luke seed: 9853482): passed 
+- Integration Test - Error Message Check (name: Luke seed: bob): passed 
+- Integration Test - Reprompt on Error Check (name: Luke seed: bob seed: 12.3 seed: 123): passed 
+Overall Coding Style
+Coding Style Review (5/5)
+Criteria: Coding style is consistent with the specified Style Guide
+
+This criteria was not evaluated
+___________
+
+Module 5 - Lab Activity - Part 2 : cs121-s26-lab05-2
+Grading Summary
+Name: AMANDAHALVERSON
+Date: Sun Mar 15 21:49:01 2026 -0600
+Grade: 25/25
+Comment: Excellent Work!
+
+Lab Activity 2 - Housing Crunch
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (HousingCrunch): passed 
+- Quality Test - Run Check (HousingCrunch): passed 
+- Integration Test - Name Check (name: Luke seed: 123 filename: MASHDatabase.csv): passed 
+- Integration Test - Housing Selection Check (name: Luke seed: 123 filename: MASHDatabase.csv): passed 
+- Integration Test - Housing Selection Check (name: Luke seed: 9853482 filename: MASHDatabase.csv): passed 
+- Integration Test - Error Message Check (name: Luke seed: 123 filename: missing.csv filename: MASHDatabase.csv): passed 
+- Integration Test - Reprompt on Error Check (name: Luke seed: 123 filename: missing.csv filename: MASHDatabase.csv)): passed 
+
+Lab Activity 3 - M.A.S.H. Game
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (MASHGame): passed 
+- Quality Test - Run Check (MASHGame): passed 
+- Integration Test - Name Check (name: Luke filename: MASHDatabase.csv): passed 
+- Integration Test - Manual Test(Play Three Times) 
+Overall Coding Style
+Coding Style Review (5/5)
+Criteria: Coding style is consistent with the specified Style Guide
+
+Manual review completed successfully
