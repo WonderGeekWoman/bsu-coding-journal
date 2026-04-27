@@ -3,6 +3,8 @@
 ** Some sections use TimeUtility, but I made it available for all
 ** The last two sections use LabUtility, brought in from a previous lab as instructed, to reuse my code
 
+______________________________________________Grading after all labs_______________________________________________________
+
 ________________________________________Lab WarmUp________________________________________________________
 ___________________________________FlowSampleEntry (driver)_______________________________________________
 import java.util.Scanner;
@@ -1070,3 +1072,89 @@ public class MonitoringStation
         return numSamples;
     }
 }
+
+______________________________________________Grading_______________________________________________________
+
+Module 6 - Lab Activity - Part 1 : cs121-s26-lab06-1
+Grading Summary
+Name: AMANDAHALVERSON
+Date: Sat Mar 28 22:42:59 2026 -0600
+Grade: 25/25
+Comment: Excellent Work!
+
+Lab Warmup - Flow Sample Entry
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (FlowSampleEntry): passed 
+- Quality Test - Run Check (FlowSampleEntry): passed 
+- Integration Test - Check Output (Agency): passed 
+- Integration Test - Check Output (Site Number): passed 
+- Integration Test - Check Output (Timestamp): passed 
+- Integration Test - Check Output (UTC Timestamp): passed 
+- Integration Test - Check Output (Flow Rate): passed 
+- Integration Test - Check Output (Qualification Code): passed 
+- Integration Test - Check Output (Sample Summary): passed 
+Lab Activity 1 - Flow Sample Parser
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (FlowSampleParser): passed 
+- Quality Test - Run Check (FlowSampleParser): passed 
+- Integration Test - Check Output (Agency): passed 
+- Integration Test - Check Output (Site Number): passed 
+- Integration Test - Check Output (Timestamp): passed 
+- Integration Test - Check Output (UTC Timestamp): passed 
+- Integration Test - Check Output (Flow Rate): passed 
+- Integration Test - Check Output (Qualification Code): passed 
+- Integration Test - Check Output (Sample Summary): passed 
+Overall Coding Style
+Coding Style Review (5/5)
+Criteria: Coding style is consistent with the specified Style Guide
+
+Manual review completed successfully
+_______________
+
+Module 6 - Lab Activity - Part 2 : cs121-s26-lab06-2
+Grading Summary
+Name: AMANDAHALVERSON
+Date: Sun Apr 5 18:31:00 2026 -0600
+Grade: 25/25
+Comment: Excellent Work!
+
+Lab Activity 2 - Monitoring Station
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (MonitoringStation): passed 
+- Quality Test - Run Check (MonitoringStation): passed 
+- Integration Test - Check Flow Rate (glenwood-boise-1.tsv): passed 
+- Integration Test - Check Station Summary (glenwood-boise-1.tsv): passed 
+- Integration Test - Check Flow Rate 1 (glenwood-boise-3.tsv): passed 
+- Integration Test - Check Flow Rate 2 (glenwood-boise-3.tsv): passed 
+- Integration Test - Check Flow Rate 3 (glenwood-boise-3.tsv): passed 
+- Integration Test - Check Station Summary (glenwood-boise-3.tsv): passed 
+- Integration Test - Check Station Summary (glenwood-boise-day.tsv): passed 
+Lab Activity 3 - River Flow Stats
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (RiverFlowStats): passed 
+- Quality Test - Run Check (RiverFlowStats): passed 
+- Integration Test - Check Max Flow Rate (glenwood-boise-2000.tsv): passed 
+- Integration Test - Check Min Flow Rate (glenwood-boise-2000.tsv): passed 
+- Integration Test - Check Average Flow Rate (glenwood-boise-2000.tsv): passed 
+- Integration Test - Check Sample Count (glenwood-boise-2000.tsv): passed 
+- Integration Test - Check Max Flow Rate (glenwood-boise-2010.tsv): passed 
+- Integration Test - Check Min Flow Rate (glenwood-boise-2010.tsv): passed 
+- Integration Test - Check Average Flow Rate (glenwood-boise-2010.tsv): passed 
+- Integration Test - Check Sample Count (glenwood-boise-2010.tsv): passed 
+- Integration Test - Check Max Flow Rate (glenwood-boise-2020.tsv): passed 
+- Integration Test - Check Min Flow Rate (glenwood-boise-2020.tsv): passed 
+- Integration Test - Check Average Flow Rate (glenwood-boise-2020.tsv): passed 
+- Integration Test - Check Sample Count (glenwood-boise-2020.tsv): passed 
+Overall Coding Style
+Coding Style Review (5/5)
+Criteria: Coding style is consistent with the specified Style Guide
+
+Manual review completed successfully
