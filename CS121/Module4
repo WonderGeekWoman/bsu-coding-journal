@@ -1,3 +1,106 @@
+___________________________________Grading after all labs______________________________________
+
+_______________________________________Lab Warmup_______________________________________________
+import java.util.Scanner;
+
+/**
+ * Takes a user-inputted year no earlier than 1582 and determines whether or not it is a leap year
+ * @author Amanda Halverson
+ */
+
+public class LeapChecker
+{
+    /**
+     * Reads year from user and outputs leap year or not.
+     * @param args
+     */
+    
+    public static void main (String[] args)
+    {
+        int userYear;
+
+        Scanner kbd = new Scanner (System.in);
+
+        /* Input processing */
+         
+        System.out.print("Enter a year: ");
+        userYear = kbd.nextInt();
+        
+        /* Conditionals and Output processing */
+
+        /* Exit immediately if input year is less than 1582, when Gregorian calendar was adopted */
+
+        if (userYear < 1582) {
+            System.out.println("ERROR: not valid in Gregorian calendar");
+            System.exit(1);
+        }
+
+        /* Calculate if leap year and output result */
+
+        else if (userYear % 4 == 0) {
+            if ((userYear % 100 == 0) && !(userYear % 400 == 0)) {
+                System.out.println(userYear + " is a not leap year");
+            }
+            else {
+            System.out.println(userYear + " is a leap year");
+            }
+        }
+        else {
+            System.out.println(userYear + " is not a leap year");
+        }
+
+        kbd.close();
+    }
+}
+________________________________________Lab Activity 1_____________________________________________________
+import java.util.Scanner;
+
+/**
+ * Sum all even numbers from 2 to user-inputted integer greater than or equal to 2, inclusive
+ * @author Amanda Halverson
+ */
+
+public class EvenNumberSum {
+    
+    /**
+     * Reads user input and outputs sum of even numbers from 2 up to input value
+     * @param args
+     */
+
+    public static void main (String[] args) {
+
+    Scanner kbd = new Scanner(System.in);
+
+    int userInt;
+    int i;
+    int sumEvens = 0;
+
+    /* Input processing */
+    
+    System.out.print("Enter a positive integer: ");
+    userInt = kbd.nextInt();
+
+    /* Exit if user int is less than 2 */
+    if (userInt < 2) {
+        System.out.println("Error: The value must be greater than two.");
+        System.exit(1);
+    }
+
+    /* Output processing */
+
+    else {
+        for (i = 2; i < userInt + 1; i += 2) {
+            sumEvens = sumEvens + i;
+        }
+
+        System.out.println ("The sum of the even integers from 2 to " + userInt + " is " + sumEvens);
+    }
+
+    kbd.close();
+
+    }
+}
+
 __________________________________Lab Activity 2___________________________________________
 
 import java.util.Scanner;
@@ -163,3 +266,76 @@ public class RockPaperScissors
         kbd.close();
     }
 }
+______________________________________________Grading_______________________________________________________
+Module 4 - Lab Activity - Part 1 : cs121-s26-lab04-1
+Grading Summary
+Name: AMANDAHALVERSON
+Date: Sun Feb 22 15:25:43 2026 -0700
+Grade: 24/25
+Comment: Excellent Work!
+
+Lab Warmup - Leap Checker
+Code Completeness (9/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (LeapChecker): passed 
+- Quality Test - Run Check (LeapChecker): passed 
+- Integration Test - Output Check (1980): passed 
+- Integration Test - Output Check (2020): passed 
+- Integration Test - Output Check (1900): failed 
+- Integration Test - Output Check (2019): passed 
+- Integration Test - Output Check (2000): passed 
+Lab Activity 1 - Even Number Sum
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (EvenNumberSum): passed 
+- Quality Test - Run Check (EvenNumberSum): passed 
+- Integration Test - Output Check (100): passed 
+- Integration Test - Output Check (101): passed 
+- Integration Test - Output Check (7): passed 
+- Integration Test - Output Check (10): passed 
+Overall Coding Style
+Coding Style Review (5/5)
+Criteria: Coding style is consistent with the specified Style Guide
+
+Manual review completed successfully
+________________________
+
+Module 4 - Lab Activity - Part 2 : cs121-s26-lab04-2
+Grading Summary
+Name: AMANDAHALVERSON
+Date: Sat Feb 28 16:53:36 2026 -0700
+Grade: 25/25
+Comment: Excellent Work!
+
+Lab Activity 2 - Vowel Counter
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (VowelCounter): passed 
+- Quality Test - Run Check (VowelCounter): passed 
+- Integration Test - Check 'a' (Mississippi River): passed 
+- Integration Test - Check 'e' (Mississippi River): passed 
+- Integration Test - Check 'i' (Mississippi River): passed 
+- Integration Test - Check 'o' (Mississippi River): passed 
+- Integration Test - Check 'u' (Mississippi River): passed 
+- Integration Test - Check 'other' (Mississippi River): passed 
+- Integration Test - Check 'a' (Life is like a box of chocolates you never know what you're gonna get...): passed 
+- Integration Test - Check 'e' (Life is like a box of chocolates you never know what you're gonna get...): passed 
+- Integration Test - Check 'i' (Life is like a box of chocolates you never know what you're gonna get...): passed 
+- Integration Test - Check 'o' (Life is like a box of chocolates you never know what you're gonna get...): passed 
+- Integration Test - Check 'u' (Life is like a box of chocolates you never know what you're gonna get...): passed 
+- Integration Test - Check 'other' (Life is like a box of chocolates you never know what you're gonna get...): passed 
+Lab Activity 3 - Rock Paper Scissors
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (RockPaperScissors): passed 
+- Quality Test - Run Check (RockPaperScissors): skipped 
+- Integration Test - Manual Test (Play Three Games): passed 
+Overall Coding Style
+Coding Style Review (5/5)
+Criteria: Coding style is consistent with the specified Style Guide
+
+Manual review completed successfully
