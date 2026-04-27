@@ -1,4 +1,4 @@
-****WARM UP*****
+_________________________________________________Lab Warmup_______________________________________________________
 import java.util.Scanner;
 
 public class AverageOfThree
@@ -25,7 +25,7 @@ public class AverageOfThree
 }
 
 
-*****LAB 1****
+_________________________________________________Lab Activity 1_______________________________________________________
 import java.util.Scanner;
 
 public class FractionConverter
@@ -50,7 +50,7 @@ public class FractionConverter
 }
 
 
-*****LAB 2*****
+_________________________________________________Lab Activity 2_______________________________________________________
 
 import java.util.Scanner;
 
@@ -94,7 +94,7 @@ Total seconds: 7519
 
 
 
-*****LAB 3*****
+_________________________________________________Lab Activity 3_______________________________________________________
 
 import java.util.Scanner;
 
