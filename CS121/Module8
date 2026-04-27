@@ -1,3 +1,5 @@
+______________________________________________Grading after all labs___________________________________________________
+
 ______________________________________Lab Warmup______________________________________________
 import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
@@ -107,9 +109,7 @@ public class SphereCalculator extends JPanel
         }
     }
 
-    /**
-     * MAIN DRIVER
-     */
+    /* MAIN DRIVER */
     public static void main (String[] args)
     {
         JFrame myFrame = new JFrame("SphereCalculator...TADA!!");
@@ -275,9 +275,7 @@ public class TriangleCalculator extends JPanel
         }
     }
 
-    /**
-     * MAIN DRIVER
-     */
+    /* MAIN DRIVER */
     public static void main (String[] args)
     {
         JFrame myFrame = new JFrame("Triangle Calculator by Amanda Halverson!");
