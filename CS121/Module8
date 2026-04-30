@@ -289,3 +289,43 @@ public class TriangleCalculator extends JPanel
         myFrame.setVisible(true);
     }
 }
+
+_____________________________________________Lab 2______________________________________________________________
+
+
+
+_____________________________________________Grading____________________________________________________________
+
+Module 8 - Lab Activity - Part 1 : cs121-s26-lab08-1
+Grading Summary
+Name: AMANDAHALVERSON
+Date: Sun Apr 26 20:22:22 2026 -0600
+Grade: 25/25
+Comment: Excellent Work!
+
+Lab Warmup - Sphere Calculator
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (SphereCalculator): passed 
+- Integration Test - Manual Test (radius: 100) 
+- Integration Test - Manual Test (radius: 7) 
+- Integration Test - Manual Test (radius: bob) 
+- Integration Test - Manual Test (radius: -10) 
+Activity 1 - Triangle Calculator
+Code Completeness (10/10)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (TriangleCalculator): passed 
+- Integration Test - Manual Test (a:100 b:352 c:276) 
+- Integration Test - Manual Test (a:100.0 b:352.0 c:276.0) 
+- Integration Test - Manual Test (a:10 b:17 c:bob) 
+- Integration Test - Manual Test (a:10 b:-17 c:15) 
+- Integration Test - Manual Test (a:9 b:20 c:30) 
+Overall Coding Style
+Coding Style Review (5/5)
+Criteria: Coding style is consistent with the specified Style Guide
+
+Manual review completed successfully
+
+
