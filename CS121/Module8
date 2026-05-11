@@ -291,8 +291,409 @@ public class TriangleCalculator extends JPanel
 }
 
 _____________________________________________Lab 2______________________________________________________________
+__________________________________DynamicDie MAIN DRIVER class__________________________________________________
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+/**
+ * DynamicDie contains the main method and provides the user with a die roller
+ * for a single die object. This die roller will also allow the user to customize
+ * the design of the die and number of sides.
+ * 
+ * @author Amanda Halverson
+ */
+
+public class DynamicDie extends JPanel
+{
+    /* Constant Data */
+    private final String[] TRIANGLE_DIE_FACE_FILES = { "triangle/blank.png",
+        "triangle/d1.png", "triangle/d2.png", "triangle/d3.png", "triangle/d4.png",
+        "triangle/d5.png", "triangle/d6.png", "triangle/d7.png", "triangle/d8.png",
+        "triangle/d9.png", "triangle/d10.png", "triangle/d11.png", "triangle/d12.png",
+        "triangle/d13.png", "triangle/d14.png", "triangle/d15.png", "triangle/d16.png",
+        "triangle/d17.png", "triangle/d18.png", "triangle/d19.png", "triangle/d20.png" };
+    
+    private final String[] DIAMOND_DIE_FACE_FILES = { "diamond/blank.png",
+        "diamond/d1.png", "diamond/d2.png", "diamond/d3.png", "diamond/d4.png",
+        "diamond/d5.png", "diamond/d6.png", "diamond/d7.png", "diamond/d8.png",
+        "diamond/d9.png", "diamond/d10.png", "diamond/d11.png", "diamond/d12.png",
+        "diamond/d13.png", "diamond/d14.png", "diamond/d15.png", "diamond/d16.png",
+        "diamond/d17.png", "diamond/d18.png", "diamond/d19.png", "diamond/d20.png" };
+
+    private final String[] HONEYCOMB_DIE_FACE_FILES = { "honeycomb/blank.png",
+        "honeycomb/d1.png", "honeycomb/d2.png", "honeycomb/d3.png", "honeycomb/d4.png",
+        "honeycomb/d5.png", "honeycomb/d6.png", "honeycomb/d7.png", "honeycomb/d8.png",
+        "honeycomb/d9.png", "honeycomb/d10.png", "honeycomb/d11.png", "honeycomb/d12.png",
+        "honeycomb/d13.png", "honeycomb/d14.png", "honeycomb/d15.png", "honeycomb/d16.png",
+        "honeycomb/d17.png", "honeycomb/d18.png", "honeycomb/d19.png", "honeycomb/d20.png" };
+
+    private enum DieSkinSelection
+    {
+        Triangle, Diamond, Honeycomb
+    }
+
+    /* Instance Data */
+    private DieButton dieButton;
+    private JButton rollDieButton;
+    private JButton designDieButton;
+    private JTextField userSides;
+    private JComboBox<DieSkinSelection> selectionBox;
+    private JLabel dieStyleLabel;
+    private JLabel dieSidesLabel;
+    private ButtonListener buttonClicked = new ButtonListener();
+    private JPanel diePanel;
+    private JPanel centerPanel;
+
+    private int userSidesChoice;
+    private String userDieChoice;
+
+    /* Constructor */
+    public DynamicDie()
+    {
+        this.setPreferredSize(new Dimension(400,300));
+        this.setBackground(Color.black);
+        this.setLayout(new BorderLayout());
+
+        Color borderColor = new Color(0, 51, 160);
+        Color panelColor = new Color(214, 65, 9);
+
+        /* Main Frame SubPanels */
+        centerPanel = new JPanel();
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.X_AXIS));
+        JPanel northPanel = new JPanel();
+        northPanel.setBackground(borderColor);
+        JPanel westPanel = new JPanel();
+        westPanel.setBackground(borderColor);
+        JPanel eastPanel = new JPanel();
+        eastPanel.setBackground(borderColor);
+        JPanel southPanel = new JPanel();
+        southPanel.setBackground(borderColor);
+        
+        /* Add Main Frame Subpanels */
+        this.add(centerPanel, BorderLayout.CENTER);
+        this.add(northPanel, BorderLayout.NORTH);
+        this.add(westPanel, BorderLayout.WEST);
+        this.add(eastPanel, BorderLayout.EAST);
+        this.add(southPanel, BorderLayout.SOUTH);
+
+        /* Die Subpanel */
+        diePanel = new JPanel();
+        diePanel.setPreferredSize(new Dimension(150,400));
+        diePanel.setLayout(new BorderLayout());
+        diePanel.setBorder(BorderFactory.createRaisedBevelBorder());
+        dieButton = new DieButton(6,TRIANGLE_DIE_FACE_FILES);
+
+        /* Control Subpanel */
+        JPanel controlPanel = new JPanel();
+        controlPanel.setPreferredSize(new Dimension(150,400));
+        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
+
+        /* Roll Subpanel */
+        JPanel rollPanel = new JPanel();
+        rollPanel.setPreferredSize(new Dimension(150,90));
+        rollPanel.setBorder(BorderFactory.createTitledBorder("Roll Die"));
+        rollPanel.setBackground(panelColor);
+        rollPanel.setLayout(new BoxLayout(rollPanel, BoxLayout.Y_AXIS));
+        JPanel rollButtonPanel = new JPanel();
+        rollButtonPanel.setBackground(panelColor);
+        rollDieButton = new JButton("Roll Die");
+        rollButtonPanel.add(rollDieButton);
+        rollPanel.add(Box.createVerticalGlue());
+        rollPanel.add(rollButtonPanel);
+
+        /* Design Subpanel */
+        JPanel designPanel = new JPanel();
+        designPanel.setLayout(new BoxLayout(designPanel, BoxLayout.Y_AXIS));
+        designPanel.setPreferredSize(new Dimension(150,300));
+        designPanel.setBorder(BorderFactory.createTitledBorder("Design Die"));
+        designPanel.setBackground(panelColor);
+
+        JPanel stylePanel = new JPanel();
+        stylePanel.setBackground(panelColor);
+        dieStyleLabel = new JLabel("Die Style:");
+        stylePanel.add(dieStyleLabel);
+        selectionBox = new JComboBox<DieSkinSelection>(DieSkinSelection.values());
+        stylePanel.add(selectionBox);
+
+        JPanel sidesPanel = new JPanel();
+        sidesPanel.setBackground(panelColor);
+        dieSidesLabel = new JLabel("Die Sides:");
+        sidesPanel.add(dieSidesLabel);
+        userSides = new JTextField("6");
+        userSides.setPreferredSize(new Dimension(95,25));
+        sidesPanel.add(userSides);
+
+        JPanel changeDesign = new JPanel();
+        changeDesign.setBackground(panelColor);
+        designDieButton = new JButton("Change Design");
+        changeDesign.add(designDieButton);
+
+        /* Add SubPanels */
+        designPanel.add(Box.createVerticalGlue());
+        designPanel.add(stylePanel);
+        designPanel.add(sidesPanel);
+        designPanel.add(Box.createVerticalGlue());
+        designPanel.add(changeDesign);
+        designPanel.add(Box.createVerticalGlue());
+        diePanel.add(dieButton);
+        centerPanel.add(diePanel);
+        centerPanel.add(controlPanel);
+        controlPanel.add(rollPanel);
+        controlPanel.add(designPanel);
+
+        /* Add Button Listeners */
+        rollDieButton.addActionListener(buttonClicked);
+        designDieButton.addActionListener(buttonClicked);
+    }
+
+    /* OTHER METHODS */
+    /* Update Die Design */
+    private void rebuildDiePanel()
+    {
+        int newSidesChoice = 0;
+        String[] newDieChoice = {};
+        
+        /* Remove Die Object */
+        diePanel.remove(dieButton);
+
+        /* Discover New Side Choice */
+        try
+        {
+            userSidesChoice = Integer.parseInt(userSides.getText());
+
+            if ((userSidesChoice < 2) || (userSidesChoice > 20))
+            {
+                    JOptionPane.showMessageDialog
+                        (null, "Please enter values in the range of 2 - 20 inclusive!");
+                    userSides.setText("");
+            }
+            else
+            {
+                newSidesChoice = userSidesChoice;
+                /* Discover New Design Choice */
+                userDieChoice = selectionBox.getSelectedItem().toString();
+                    switch (userDieChoice)
+                    {
+                        case "Triangle":
+                            newDieChoice = TRIANGLE_DIE_FACE_FILES;
+                            break;
+                        case "Diamond":
+                            newDieChoice = DIAMOND_DIE_FACE_FILES;
+                            break;
+                        case "Honeycomb":
+                            newDieChoice = HONEYCOMB_DIE_FACE_FILES;
+                            break;
+                    }
+            }
+        }
+        catch (NumberFormatException err)
+        {
+            JOptionPane.showMessageDialog(null, "Please enter an integer value!");
+                userSides.setText("");
+        }
+        DieButton newDieButton = new DieButton(newSidesChoice, newDieChoice);
+        dieButton = newDieButton;
+        diePanel.add(dieButton);
+
+        diePanel.revalidate();
+        diePanel.repaint();
+    }
+
+    private class ButtonListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            if (e.getSource() == dieButton || e.getSource() == rollDieButton)
+            {
+                dieButton.rollDie();
+            }
+            else if (e.getSource() == designDieButton)
+            {
+                rebuildDiePanel();
+            }
+        }
+    }
 
 
+    /* MAIN DRIVER */
+    public static void main(String[] args)
+    {
+        JFrame frame = new JFrame(" Dynamic Die by Amanda Halverson");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(new DynamicDie());
+
+        frame.pack();
+        frame.setVisible(true);
+    }
+}
+
+______________________________________________Die class________________________________________________________
+/**
+ * Basic Die class that implements the Comparable interface. This class was
+ *    developed during the lecture on class design.
+ * @author Luke Hindman
+ */
+import java.util.Random;
+
+public class Die implements Comparable<Die>
+{
+    /* 1. Instance Variables */
+    private int faceValue;
+    private int numSides;
+
+    /* 2. Constructor(s) */
+    public Die() {
+        faceValue = 6;
+        numSides = 6;
+    }
+
+    public Die(int numSides) {
+        faceValue = 1;
+        this.numSides = numSides;
+    }
+    /* 3. Other methods */
+
+    public int roll() {
+        Random gen = new Random();
+        this.faceValue = gen.nextInt(this.numSides) + 1;
+        return this.faceValue;
+    }
+
+    public int getFaceValue() {
+        return this.faceValue;
+    }
+
+    public void setFaceValue(int faceValue) {
+        if (faceValue > 0 && faceValue <= this.numSides){
+            this.faceValue = faceValue;
+        }
+    }
+
+    // public String toString() {
+    //     String output  = "";
+
+    //     output += "The value of my beautiful " + this.numSides + " sided die is: " + this.faceValue;
+
+    //     return output;
+    // }
+
+    // /* Static methods */
+    // public static Die max(Die d1, Die d2) {
+    //     if (d1.getFaceValue() >= d2.getFaceValue()) {
+    //         return d1;
+    //     } else {
+    //         return d2;
+    //     }
+    // }
+
+    /* Comparable Interface Methods*/
+    @Override
+    public int compareTo(Die arg0) {
+        // if (this.getFaceValue() > arg0.getFaceValue()) {
+        //     return 1;
+        // } else if (this.getFaceValue() < arg0.getFaceValue()) {
+        //     return -1;
+        // } else {
+        //     return 0;
+        // }
+        return this.getFaceValue() - arg0.getFaceValue();
+    }
+}
+
+____________________________________________DieButton class____________________________________________________
+import javax.swing.JButton;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+
+import java.awt.Color;
+import java.awt.Dimension;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+/**
+ * The DieButton class "has-a" Die as an instance variable which is an example of a
+ *   aggregation relationship. It also demonstrates inheritence by extending the 
+ *   JButton class.  DieButton "is-a" JButton plus a little bit more. :)
+ * 
+ * @author Luke Hindman
+ */
+@SuppressWarnings("serial")
+public class DieButton extends JButton {
+
+    /* Instance Variables */
+    private Die myDie;
+    private ImageIcon[] myDieFaces;
+    private boolean hideAfterRoll;
+
+    /* Constructor */
+    public DieButton(int numSides, String[] faceFiles) {
+
+        /* Check to ensure we have face images for each side
+         *    of the die + a blank face */
+        if (faceFiles.length < numSides + 1) {
+            throw new java.lang.RuntimeException("Error: Die has more sides than faces");
+        }
+
+        this.myDie = new Die(numSides);
+        this.hideAfterRoll = false;
+
+        /* Create the icons */
+        this.myDieFaces = new ImageIcon[faceFiles.length];
+        for (int i = 0; i < faceFiles.length; i++) {
+                myDieFaces[i] = new ImageIcon(faceFiles[i]);
+                System.out.println("Creating icon: " + faceFiles[i]);
+
+        }
+        this.setPreferredSize(new Dimension(112, 112));
+        this.setBackground(Color.white);
+        
+        /* Remove the border */
+        this.setFocusPainted(false);
+        Border emptyBorder = BorderFactory.createEmptyBorder();
+        this.setBorder(emptyBorder);
+
+        this.setIcon(myDieFaces[myDie.getFaceValue()]);
+        this.addActionListener(new DieButtonListener());
+    }
+
+    /* Methods */
+    public int getFaceValue() {
+        return this.myDie.getFaceValue();
+    }
+
+    public void enableHideAfterRoll() {
+        this.hideAfterRoll = true;
+    }
+
+    public void disableHideAfterRoll() {
+        this.hideAfterRoll = false;
+    }
+
+    public void showFace() {
+        setIcon(myDieFaces[myDie.getFaceValue()]);
+    }
+
+    public void rollDie() {
+        this.myDie.roll();
+        if (hideAfterRoll) {
+            setIcon(myDieFaces[0]);
+        } else {
+            setIcon(myDieFaces[myDie.getFaceValue()]);
+        }
+    }
+
+    private class DieButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            rollDie();
+        }
+    }
+}
 
 _____________________________________________Grading____________________________________________________________
 
@@ -327,5 +728,26 @@ Coding Style Review (5/5)
 Criteria: Coding style is consistent with the specified Style Guide
 
 Manual review completed successfully
+_____________________________________
 
+Module 8 - Lab Activity - Part 2 : cs121-s26-lab08-2
+Grading Summary
+Name: AMANDAHALVERSON
+Date: Sun May 3 00:24:34 2026 -0600
+Grade: 25/25
+Comment: Excellent Work!
 
+Lab Activity 2 - Dynamic Die
+Code Completeness (25/25)
+Criteria: Code compiles without warnings runs without warnings or errors. Solution fully satisfies all requirements specified in the Lab Guide and produces the expected output.
+
+- Quality Test - Clean Build Check (DynamicDie): passed 
+- Integration Test - Manual Test (DieButton rolls when clicked) 
+- Integration Test - Manual Test (Roll Die button roles die when clicked) 
+- Integration Test - Manual Test (Reconfigure style (Diamond)) 
+- Integration Test - Manual Test (Reconfigure style (Honeycomb)) 
+- Integration Test - Manual Test (Reconfigure style (Triangle)) 
+- Integration Test - Manual Test (Reconfigure number of sides (middle of range) ) 
+- Integration Test - Manual Test (Reconfigure number of sides (edge cases: 220) ) 
+- Integration Test - Manual Test (Check non-integer number of sides) 
+- Integration Test - Manual Test (Check out-of-range number of sides) 
