@@ -1,0 +1,20 @@
+Bug 1:
+Name of failed test: emptySet_testIsEmpty
+Breakpoints placed: SetTester line 111
+Where bug found: ArraySet public Boolean isEmpty()
+How bug found: Stepped into line 111, into 100, over ArraySet constructor because it looked correct, back into lines 100 and 111, into 658 to the overridden public Boolean isEmpty in ArraySet. It could never return true when rear > 0 because the current value of rear was 0.
+How bug fixed: This method was returning true when rear is greater than 0 and that should be returning false. Changed ">" to "==". Reran tests and it passed the toString tests.
+
+Bug 2:
+Name of failed test: EmptySet_addA_A_testisEmpty
+Breakpoints placed: SetTester line 147
+Where bug found: ArraySet line 56
+How bug found: Stepped into line 147, over 136, into 137, over ArraySet line 55-59. If add element, need to increment rear since rear is tracking size of set and next open index.
+How bug fixed: Added rear++ to new line 60. Reran tests and it passed the toString tests. Now 93 tests run with 2 failing
+
+Bug 3:
+Name of failed test: A_addB_AB_testRemoveA
+Breakpoints placed: SetTester line 265
+Where bug found: ArraySet line 74
+How bug found: I saw in the terminal that ArraySet line 75 was causing an ArrayIndexOutOfBoundsException in the top failed test, but also 4 tests after that, so I thought maybe it had to do with the method in that area. I started from where it failed and worked my way in and over through the methods, and it did bring me to the method around line 75. I found that the while loop at line 74 had a condition of "i < rear", which will make the loop go one further index than indexes with values. In this case, that is outside the bounds of the array.
+How bug fixed: Changed "i < rear" to "i < rear - 1", which will stop the loop at the last index that holds values.
